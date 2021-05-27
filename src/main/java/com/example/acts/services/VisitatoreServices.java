@@ -12,7 +12,7 @@ public class VisitatoreServices {
     @Autowired
     private VisitatoreRepository visitatoreRepository;
 
-    public Boolean AddElem(String nome, String cognome, Date oraInizio, Boolean headphones){
+    public Boolean addElem(String nome, String cognome, Date oraInizio, Boolean headphones){
         try{
             visitatoreRepository.save(new Visitatore(nome,cognome,oraInizio,headphones));
         }catch (Exception e){
@@ -21,4 +21,6 @@ public class VisitatoreServices {
         }
         return true;
     }
+
+
 }

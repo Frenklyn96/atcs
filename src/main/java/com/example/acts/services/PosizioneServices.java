@@ -13,7 +13,7 @@ public class PosizioneServices {
     @Autowired
     private PosizioneRepository posizioneRepository;
 
-    public Boolean AddElem (Stanza stanza, Date oraInizio){
+    public Boolean addElem (Stanza stanza, Date oraInizio){
         try {
             posizioneRepository.save(new Posizione(stanza,oraInizio));
         } catch (Exception e)
