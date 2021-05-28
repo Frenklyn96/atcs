@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Time;
 import java.util.Date;
 
-@RestController
+@Controller
 public class ProvaController {
     @Autowired
-    GruppoServices gruppoServices;
+    private GruppoServices gruppoServices;
     @Autowired
-    PosizioneServices posizioneServices;
+    private PosizioneServices posizioneServices;
     @Autowired
-    StanzaServices stanzaServices;
+    private StanzaServices stanzaServices;
     @Autowired
-    VisitatoreServices visitatoreServices;
+    private VisitatoreServices visitatoreServices;
 
 
     @GetMapping("/ciao")
@@ -31,9 +31,11 @@ public class ProvaController {
 
     @GetMapping ("/inizializza")
     public void inizializza (){
-        stanzaServices.addElem("cameralollo");
-       gruppoServices.addElem(new Date(10,12,2020,05,06),new Time(05,05,05),true);
-       posizioneServices.addElem(stanzaServices.getStanza("cameralollo"),new Date(19,12,2020,05,06));
-        visitatoreServices.addElem("lorenzo","Cancello",new Date(10,12,2020,05,06),true);
+        stanzaServices.addElem(0L,"cameralollo");
+        gruppoServices.addElem(0L,new Date(10,12,2020),new Date(10,12,2020,05,06),new Date(10,12,2020,06,06),true,stanzaServices.getStanza("cameralollo"));
+        System.out.println("-->"+gruppoServices.getGruppo(0L).get().getId());
+        visitatoreServices.addElem(0L,"lorenzo","Cancello",new Date(10,12,2020,05,06),new Date(10,12,2020,06,06),true,gruppoServices.getGruppo(0L).get(),stanzaServices.getStanza("cameralollo"));
+        posizioneServices.addElem(stanzaServices.getStanza("cameralollo"),new Date(19,12,2020,05,06),new Date(19,12,2020,06,06),visitatoreServices.getVisitatoreById(0L).get());
+
     }
 }

@@ -2,6 +2,7 @@ package com.example.acts.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -13,17 +14,21 @@ public class Posizione {
     @OneToOne
     private Stanza stanza;
 
-    @NotBlank
+    @NotNull
     private Date oraInizio;
 
-    @NotBlank
+    @NotNull
     private Date oraFine;
+    @ManyToOne
+    private Visitatore visitatore;
 
     public Posizione(){}
 
-    public Posizione(Stanza stanza, Date oraInizio) {
+    public Posizione(Stanza stanza, Date oraInizio, Date oraFine,Visitatore visitatore) {
         this.stanza = stanza;
         this.oraInizio = oraInizio;
+        this.oraFine=oraFine;
+        this.visitatore=visitatore;
     }
 
     public Long getId() {
@@ -56,5 +61,13 @@ public class Posizione {
 
     public void setOraFine(Date oraFine) {
         this.oraFine = oraFine;
+    }
+
+    public Visitatore getVisitatore() {
+        return visitatore;
+    }
+
+    public void setVisitatore(Visitatore visitatore) {
+        this.visitatore = visitatore;
     }
 }

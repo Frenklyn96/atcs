@@ -2,41 +2,46 @@ package com.example.acts.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.validation.constraints.NotNull;
+import java.util.*;
 
 @Entity
 public class Visitatore {
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
-    @NotBlank
+    @NotNull
     private Date oraInizio;
-    @NotBlank
-    private Date OraFine;
+    @NotNull
+    private Date oraFine;
     @OneToOne
     private Gruppo gruppo;
-    @NotBlank
+    @NotNull
     private Boolean headphones;
     @NotBlank
     private String nome;
     @NotBlank
     private String cognome;
-    @OneToMany
-    private List<Posizione> posizioni;
+    @OneToMany(mappedBy = "visitatore")
+    private Set<Posizione> posizioni;
+    @ManyToOne
+    private Stanza stanza;
 
-    public Visitatore(String nome, String cognome, Date oraInizio, Boolean headphones) {
+    public Visitatore(){}
+
+
+
+    public Visitatore(Long id, String nome, String cognome, Date oraInizio, Date oraFine, Boolean headphones, Gruppo gruppo, Stanza stanza){
+        this.id=id;
         this.nome= nome;
         this.cognome=cognome;
         this.oraInizio = oraInizio;
+        this.oraFine=oraFine;
         this.headphones=headphones;
-        posizioni = new ArrayList<>();
-
+        this.gruppo=gruppo;
+        this.stanza=stanza;
+        posizioni = new TreeSet<Posizione>();
 
     }
-
-    public Visitatore(){}
 
     public Long getId() {
         return id;
@@ -55,11 +60,11 @@ public class Visitatore {
     }
 
     public Date getOraFine() {
-        return OraFine;
+        return oraFine;
     }
 
     public void setOraFine(Date oraFine) {
-        OraFine = oraFine;
+        oraFine = oraFine;
     }
 
     public Gruppo getGruppo() {
@@ -78,11 +83,35 @@ public class Visitatore {
         this.headphones = headphones;
     }
 
-    public List<Posizione> getPosizioni() {
+    public Set<Posizione> getPosizioni() {
         return posizioni;
     }
 
-    public void setPosizioni(List<Posizione> posizioni) {
+    public void setPosizioni(Set<Posizione> posizioni) {
         this.posizioni = posizioni;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCognome() {
+        return cognome;
+    }
+
+    public void setCognome(String cognome) {
+        this.cognome = cognome;
+    }
+
+    public Stanza getStanza() {
+        return stanza;
+    }
+
+    public void setStanza(Stanza stanza) {
+        this.stanza = stanza;
     }
 }

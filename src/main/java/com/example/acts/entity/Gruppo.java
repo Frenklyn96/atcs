@@ -1,32 +1,42 @@
 package com.example.acts.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Time;
 import java.util.Date;
 
 @Entity
 public class Gruppo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NotBlank
+    @NotNull
     private Date data;
-    @NotBlank
+    @NotNull
     private Date oraInizio;
-    @NotBlank
+    @NotNull
     private Date oraFine;
-    @NotBlank
+    @NotNull
     private Boolean headphones;
+    @ManyToOne
+    private Stanza stanza;
+
+    public Stanza getStanza() {
+        return stanza;
+    }
+
+    public void setStanza(Stanza stanza) {
+        this.stanza = stanza;
+    }
 
     public Gruppo(){}
-    public Gruppo(Date data, Date oraInizio, Boolean headphones) {
+    public Gruppo(Long id,Date data, Date oraInizio, Date oraFine, Boolean headphones,Stanza stanza) {
+        this.id=id;
         this.data = data;
         this.oraInizio = oraInizio;
+        this.oraFine=oraFine;
         this.headphones = headphones;
+        this.stanza=stanza;
     }
 
     public Long getId() {

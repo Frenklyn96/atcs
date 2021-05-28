@@ -5,31 +5,33 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
 public class Stanza {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank
     private String nome;
 
-    @OneToMany
-    private List<Visitatore> visitatori;
+    @OneToMany(mappedBy = "stanza")
+    private Set<Visitatore> visitatori;
 
-    @OneToMany
-    private List<Gruppo> Gruppi;
+    @OneToMany(mappedBy="stanza")
+    private Set<Gruppo> gruppi;
 
     public Stanza(){}
 
-    public Stanza(String nome) {
+    public Stanza(Long id,String nome) {
+        this.id=id;
         this.nome = nome;
-        this.visitatori = new ArrayList<>();
-        this.Gruppi=new ArrayList<>();
+        this.visitatori = new HashSet<Visitatore>();
+        this.gruppi=new HashSet<Gruppo>();
 
     }
 
@@ -41,7 +43,7 @@ public class Stanza {
         return nome;
     }
 
-    public List<Visitatore> getVisitatori() {
+    public Set<Visitatore> getVisitatori() {
         return visitatori;
     }
 
@@ -49,9 +51,19 @@ public class Stanza {
         this.nome = nome;
     }
 
-    public void setVisitatori(List<Visitatore> visitatori) {
+    public void setVisitatori(Set<Visitatore> visitatori) {
         this.visitatori = visitatori;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public Set<Gruppo> getGruppi() {
+        return gruppi;
+    }
+
+    public void setGruppi(Set<Gruppo> gruppi) {
+        this.gruppi = gruppi;
+    }
 }
