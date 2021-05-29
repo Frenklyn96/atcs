@@ -14,21 +14,21 @@ import java.util.Set;
 public class Stanza {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank
     private String nome;
 
-    @OneToMany(mappedBy = "stanza")
+    @ManyToMany
     private Set<Visitatore> visitatori;
 
-    @OneToMany(mappedBy="stanza")
+    @ManyToMany
     private Set<Gruppo> gruppi;
 
     public Stanza(){}
 
-    public Stanza(Long id,String nome) {
-        this.id=id;
+    public Stanza(String nome) {
         this.nome = nome;
         this.visitatori = new HashSet<Visitatore>();
         this.gruppi=new HashSet<Gruppo>();
@@ -65,5 +65,13 @@ public class Stanza {
 
     public void setGruppi(Set<Gruppo> gruppi) {
         this.gruppi = gruppi;
+    }
+
+    public void addGruppo(Gruppo g) {
+        gruppi.add(g);
+    }
+
+    public void addVisitatore(Visitatore v) {
+        visitatori.add(v);
     }
 }

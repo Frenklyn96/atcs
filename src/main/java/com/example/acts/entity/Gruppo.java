@@ -5,6 +5,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Time;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Gruppo {
@@ -18,25 +20,38 @@ public class Gruppo {
     private Date oraFine;
     @NotNull
     private Boolean headphones;
-    @ManyToOne
-    private Stanza stanza;
+    @ManyToMany
+    private Set<Stanza> stanze;
+    @OneToMany
+    private Set<Visitatore> visitatori;
 
-    public Stanza getStanza() {
-        return stanza;
-    }
 
-    public void setStanza(Stanza stanza) {
-        this.stanza = stanza;
-    }
 
     public Gruppo(){}
-    public Gruppo(Long id,Date data, Date oraInizio, Date oraFine, Boolean headphones,Stanza stanza) {
+    public Gruppo(Long id,Date data, Date oraInizio, Date oraFine, Boolean headphones) {
         this.id=id;
         this.data = data;
         this.oraInizio = oraInizio;
         this.oraFine=oraFine;
         this.headphones = headphones;
-        this.stanza=stanza;
+        this.stanze=new HashSet<Stanza>();
+        this.visitatori= new HashSet<Visitatore>();
+    }
+
+    public Set<Visitatore> getVisitatori() {
+        return visitatori;
+    }
+
+    public void setVisitatori(Set<Visitatore> visitatori) {
+        this.visitatori = visitatori;
+    }
+
+    public Set<Stanza> getStanze() {
+        return stanze;
+    }
+
+    public void setStanze(Set<Stanza> stanze) {
+        this.stanze = stanze;
     }
 
     public Long getId() {
@@ -77,5 +92,9 @@ public class Gruppo {
 
     public void setHeadphones(Boolean headphones) {
         this.headphones = headphones;
+    }
+
+    public void addStanza(Stanza stanza) {
+        stanze.add(stanza);
     }
 }

@@ -9,11 +9,8 @@ import java.util.*;
 public class Visitatore {
     @Id
     private Long id;
-    @NotNull
-    private Date oraInizio;
-    @NotNull
-    private Date oraFine;
-    @OneToOne
+
+    @ManyToOne
     private Gruppo gruppo;
     @NotNull
     private Boolean headphones;
@@ -23,23 +20,21 @@ public class Visitatore {
     private String cognome;
     @OneToMany(mappedBy = "visitatore")
     private Set<Posizione> posizioni;
-    @ManyToOne
-    private Stanza stanza;
+    @ManyToMany
+    private Set<Stanza> stanze;
 
     public Visitatore(){}
 
 
 
-    public Visitatore(Long id, String nome, String cognome, Date oraInizio, Date oraFine, Boolean headphones, Gruppo gruppo, Stanza stanza){
+    public Visitatore(Long id, String nome, String cognome, Boolean headphones, Gruppo gruppo){
         this.id=id;
         this.nome= nome;
         this.cognome=cognome;
-        this.oraInizio = oraInizio;
-        this.oraFine=oraFine;
         this.headphones=headphones;
         this.gruppo=gruppo;
-        this.stanza=stanza;
-        posizioni = new TreeSet<Posizione>();
+        this.stanze=new HashSet<Stanza>();
+        this.posizioni = new HashSet<Posizione>();
 
     }
 
@@ -51,21 +46,6 @@ public class Visitatore {
         this.id = id;
     }
 
-    public Date getOraInizio() {
-        return oraInizio;
-    }
-
-    public void setOraInizio(Date oraInizio) {
-        this.oraInizio = oraInizio;
-    }
-
-    public Date getOraFine() {
-        return oraFine;
-    }
-
-    public void setOraFine(Date oraFine) {
-        oraFine = oraFine;
-    }
 
     public Gruppo getGruppo() {
         return gruppo;
@@ -107,11 +87,15 @@ public class Visitatore {
         this.cognome = cognome;
     }
 
-    public Stanza getStanza() {
-        return stanza;
+    public Set<Stanza> getStanze() {
+        return stanze;
     }
 
-    public void setStanza(Stanza stanza) {
-        this.stanza = stanza;
+    public void setStanze(Set<Stanza> stanze) {
+        this.stanze = stanze;
+    }
+
+    public void addStanza(Stanza s) {
+        stanze.add(s);
     }
 }
