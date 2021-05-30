@@ -1,12 +1,10 @@
 package com.example.acts.services;
 
 import com.example.acts.entity.Gruppo;
-import com.example.acts.entity.Stanza;
 import com.example.acts.repository.GruppoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
 import java.util.Date;
 import java.util.Optional;
 
@@ -41,4 +39,6 @@ public class GruppoServices {
     public boolean esisteGruppo(Long l) {
         return(gruppoRepository.findById(l).isPresent());
     }
+
+
 }

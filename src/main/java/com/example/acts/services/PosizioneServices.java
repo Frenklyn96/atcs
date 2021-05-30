@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class PosizioneServices {
@@ -25,4 +27,7 @@ public class PosizioneServices {
         return true;
     }
 
+    public List<Posizione> getOre(Set<Stanza> stanze) {
+        return(posizioneRepository.findByidVisitatoreAndidStanza());
+    }
 }

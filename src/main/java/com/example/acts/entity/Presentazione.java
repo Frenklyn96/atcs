@@ -22,6 +22,7 @@ public class Presentazione {
     @ManyToOne
     private Visitatore visitatore;
 
+
     public Presentazione(){}
 
     public Presentazione(Stanza stanza, Date oraInizio, Date oraFine,Visitatore visitatore) {

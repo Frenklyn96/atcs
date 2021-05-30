@@ -36,4 +36,8 @@ public class VisitatoreServices {
     public void save(Visitatore v) {
         visitatoreRepository.save(v);
     }
+
+    public Optional<Visitatore> getVisitaotoreByGroup(Long idGruppo) {
+        return(visitatoreRepository.findByidGruppo(idGruppo));
+    }
 }

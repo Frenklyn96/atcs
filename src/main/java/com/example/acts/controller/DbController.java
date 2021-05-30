@@ -1,22 +1,18 @@
 package com.example.acts.controller;
 
 import com.example.acts.entity.Gruppo;
-import com.example.acts.entity.Posizione;
 import com.example.acts.entity.Stanza;
 import com.example.acts.entity.Visitatore;
 import com.example.acts.services.*;
 import au.com.bytecode.opencsv.CSVReader;
 
-import com.opencsv.exceptions.CsvException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -24,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-public class ProvaController {
+public class DbController {
     @Autowired
     private PresentazioneServices presentazioneServices;
     @Autowired
@@ -37,22 +33,10 @@ public class ProvaController {
     private VisitatoreServices visitatoreServices;
 
 
-    @GetMapping("/ciao")
-    public String sayHello (@RequestParam(value="name",defaultValue ="world") String name){
-        return String.format("Hello %s", name);
-    }
-
     @GetMapping ("/inizializza")
-    public void inizializza (/*Long idStanza, String nomeStanza,Long idGruppo, Date dataGruppo, Date oraInizioGruppo, Date oraFineGruppo, Boolean headphonesGruppo,
-                             Long idVisitatore, String nomeVisitatore, String cognomeVisitatore, Date oraInizioVisitatore, Date oraFineVisitatore, Boolean headphonesVisitatore,
-                             Date dataInizioPosizione,Date daFinePosizione*/){
-        stanzaServices.addElem("cameralollo");
-        gruppoServices.addElem(0L,new Date(10,12,2020),new Date(10,12,2020,05,06),new Date(10,12,2020,06,06),true);
-        aggiungiStanzaGruppo(0L,"cameralollo");
-
-        visitatoreServices.addElem(0L,"lorenzo","Cancello",true,gruppoServices.getGruppo(0L).get());
-        posizioneServices.addElem(stanzaServices.getStanza("cameralollo"),new Date(19,12,2020,05,06),new Date(19,12,2020,06,06),visitatoreServices.getVisitatoreById(0L).get());
-
+    public void inizializza () throws IOException, ParseException {
+        LetturaRecordGruppi();
+        LetturaRecaordVisitatori();
     }
 
     public void aggiungiStanzaGruppo(Long idGruppo, String nomeStanza) {
@@ -115,7 +99,6 @@ public class ProvaController {
         String path="C:\\Users\\marco\\Downloads\\02_Seminario\\02_Seminario\\Museum Data\\Visitors Logs\\";
         File folder = new File("C:\\Users\\marco\\Downloads\\02_Seminario\\02_Seminario\\Museum Data\\Visitors Logs");
         File[] listOfFiles = folder.listFiles();
-        gruppoServices.addElem(0L,new Date(10,12,2020),new Date(10,12,2020,05,06),new Date(10,12,2020,06,06),true);
         for (File file:listOfFiles){
             if (file.getName().contains(".csv"))
             {
@@ -123,7 +106,8 @@ public class ProvaController {
                 List<String> array =     Arrays.asList(file.getName().split("_"));
                 Long idGruppo = Long.parseLong(array.get(2).substring(0,array.get(2).indexOf(".")));
                 Long idVisitatore=Long.parseLong(array.get(1));
-
+                if (!gruppoServices.esisteGruppo(idGruppo))
+                    gruppoServices.addElem(idGruppo,new Date(10,12,2020),new Date(10,12,2020,05,06),new Date(10,12,2020,06,06),true);
                 creaVisitaotre(idGruppo,idVisitatore);
                 CSVReader reader = new CSVReader(new FileReader(path+file.getName()),',', '"', 1);
                 String[] nextLine;
@@ -157,7 +141,6 @@ public class ProvaController {
         gruppoServices.save(g);
         v.addGruppo(g);
         visitatoreServices.save(v);
-
     }
 
     public void RiempiPosizioni(CSVReader reader,Long idVisitatore,Long idGruppo) throws IOException, ParseException {
@@ -179,19 +162,17 @@ public class ProvaController {
         String[] nextLine;
         nextLine = reader.readNext();
         while ((nextLine[0].length()!=0)&&(nextLine!=null)) {
-                System.out.println(nextLine.length );
                 if (!stanzaServices.EsisteStanza(nextLine[2]))
                  {
                      stanzaServices.addElem(nextLine[2]);
                      aggiungiStanzaVisitatore(nextLine[2],idVisitatore);
                      aggiungiStanzaGruppo(idGruppo,nextLine[2]);
-
-
                  }
                 presentazioneServices.addElem(stanzaServices.getStanza(nextLine[2]), creaData(nextLine[0]), creaData(nextLine[1]),visitatoreServices.getVisitatoreById(idVisitatore).get());
                 nextLine = reader.readNext();
         }
     }
+
     public Date creaData (String data) throws ParseException {
         Date date1;
         if(data.contains("/"))

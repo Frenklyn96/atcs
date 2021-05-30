@@ -8,4 +8,6 @@ import java.util.Optional;
 public interface VisitatoreRepository extends JpaRepository<Visitatore,Long> {
     @Override
     Optional<Visitatore> findById(Long aLong);
+
+    Optional<Visitatore> findByidGruppo(Long idGruppo);
 }
