@@ -97,4 +97,8 @@ public class Gruppo {
     public void addStanza(Stanza stanza) {
         stanze.add(stanza);
     }
+
+    public void addVisitatore(Visitatore v) {
+        visitatori.add(v);
+    }
 }

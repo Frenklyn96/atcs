@@ -75,15 +75,15 @@ public class ProvaController {
 
     @GetMapping("/grouping")
     public void LetturaRecordGruppi() throws IOException, ParseException {
-        String path="C:\\Users\\marco\\Downloads\\02_Seminario\\02_Seminario\\Museum Data\\Visitors Logs\\";
+        String path="C:\\Users\\marco\\Downloads\\02_Seminario\\02_Seminario\\Museum Data\\";
         File folder = new File("C:\\Users\\marco\\Downloads\\02_Seminario\\02_Seminario\\Museum Data");
         File[] listOfFiles = folder.listFiles();
         for (File file:listOfFiles){
-            if (file.getName().equals("Visitors grouping.xlsx"))
+            if (file.getName().equals("Visitors grouping.csv"))
             {
                 System.out.println("Inizio lettura file");
                 System.out.println(file.getName());
-                CSVReader reader = new CSVReader(new FileReader(path+file.getName()));
+                CSVReader reader = new CSVReader(new FileReader(path+file.getName()),';', '"', 1);
                 String[] nextLine;
                 while ((nextLine = reader.readNext()) != null) {
                        riempiGruppo(reader);
@@ -96,15 +96,16 @@ public class ProvaController {
     private void riempiGruppo(CSVReader reader) throws IOException, ParseException {
         String[] nextLine;
         nextLine = reader.readNext();
-        Boolean headphones=false;
-        while (nextLine[0].length()!=0) {
+        Boolean headphones;
+        while (nextLine!=null) {
+            headphones=false;
             if (!gruppoServices.esisteGruppo(Long.parseLong(nextLine[1])))
             {
-                if (nextLine[7]=="Y")
+                if (nextLine[7].equals("Y"))
                     headphones=true;
                 gruppoServices.addElem(Long.parseLong(nextLine[1]),creaData(nextLine[3]),creaData(nextLine[4]),creaData(nextLine[5]),headphones);
             }
-
+        nextLine = reader.readNext();
         }
 
     }
@@ -118,56 +119,73 @@ public class ProvaController {
         for (File file:listOfFiles){
             if (file.getName().contains(".csv"))
             {
-                System.out.println("Inizio lettura file");
-                Long idVisitatore=creaVisitaotre(file.getName());
+                System.out.println("Inizio lettura file: "+file.getName());
+                List<String> array =     Arrays.asList(file.getName().split("_"));
+                Long idGruppo = Long.parseLong(array.get(2).substring(0,array.get(2).indexOf(".")));
+                Long idVisitatore=Long.parseLong(array.get(1));
+
+                creaVisitaotre(idGruppo,idVisitatore);
                 CSVReader reader = new CSVReader(new FileReader(path+file.getName()),',', '"', 1);
                 String[] nextLine;
                 while ((nextLine = reader.readNext()) != null) {
-                    //System.out.println("--------------"+nextLine[0]);
+
                     if (nextLine[0].equals("Positions "))
-                        RiempiPosizioni(reader,idVisitatore);
+                        RiempiPosizioni(reader,idVisitatore,idGruppo);
                     else if (nextLine[0].equals("presentations "))
-                        RiempiPresentatione(reader,idVisitatore);
+                        RiempiPresentatione(reader,idVisitatore,idGruppo);
                 }
-            break;
+
             }
         }
     }
 
     //restituisce id visitatore
-    private Long creaVisitaotre(String name) {
-        List<String> array = Arrays.asList(name.split("_"));
-        List<String> numeroGruppo = Arrays.asList(array.get(2).split("."));
-        if (!visitatoreServices.esisteVisitatore(Long.parseLong(array.get(1))))
-                visitatoreServices.addElem(Long.parseLong(array.get(1)), "Lorenzo", "Cancello", false, gruppoServices.getGruppo(0L).get());//gruppoServices.getGruppo(Long.parseLong(numeroGruppo.get(0))).get()));
-        return (Long.parseLong(array.get(1)));
+    private void creaVisitaotre(Long idGruppo,Long idVisitatore) {
+
+        if (!visitatoreServices.esisteVisitatore(idVisitatore)){
+            visitatoreServices.addElem(idVisitatore, "Lorenzo", "Cancello", false, gruppoServices.getGruppo(idGruppo).get());
+            aggiungiGruppoVisitatore (idGruppo,idVisitatore);
+
+        }
     }
 
 
-    public void RiempiPosizioni(CSVReader reader,Long idVisitatore) throws IOException, ParseException {
+    public void aggiungiGruppoVisitatore(Long idGruppo, Long idVisitatore){
+        Gruppo g= gruppoServices.getGruppo(idGruppo).get();
+        Visitatore v= visitatoreServices.getVisitatoreById(idVisitatore).get();
+        g.addVisitatore(v);
+        gruppoServices.save(g);
+        v.addGruppo(g);
+        visitatoreServices.save(v);
+
+    }
+
+    public void RiempiPosizioni(CSVReader reader,Long idVisitatore,Long idGruppo) throws IOException, ParseException {
         String[] nextLine;
         nextLine = reader.readNext();
-        while (nextLine[0].length()!=0) {
-                System.out.println(nextLine.length );
+        while ((nextLine[0].length()!=0)&&(nextLine!=null)) {
                 if (!stanzaServices.EsisteStanza(nextLine[2]))
                 {
                     stanzaServices.addElem(nextLine[2]);
                     aggiungiStanzaVisitatore(nextLine[2],idVisitatore);
+                    aggiungiStanzaGruppo(idGruppo,nextLine[2]);
                 }
                 posizioneServices.addElem(stanzaServices.getStanza(nextLine[2]), creaData(nextLine[0]), creaData(nextLine[1]),visitatoreServices.getVisitatoreById(idVisitatore).get());
                 nextLine = reader.readNext();
         }
     }
 
-    public void RiempiPresentatione(CSVReader reader,Long idVisitatore) throws IOException, ParseException {
+    public void RiempiPresentatione(CSVReader reader,Long idVisitatore,Long idGruppo) throws IOException, ParseException {
         String[] nextLine;
         nextLine = reader.readNext();
-        while (nextLine[0].length()!=0) {
+        while ((nextLine[0].length()!=0)&&(nextLine!=null)) {
                 System.out.println(nextLine.length );
                 if (!stanzaServices.EsisteStanza(nextLine[2]))
                  {
                      stanzaServices.addElem(nextLine[2]);
                      aggiungiStanzaVisitatore(nextLine[2],idVisitatore);
+                     aggiungiStanzaGruppo(idGruppo,nextLine[2]);
+
 
                  }
                 presentazioneServices.addElem(stanzaServices.getStanza(nextLine[2]), creaData(nextLine[0]), creaData(nextLine[1]),visitatoreServices.getVisitatoreById(idVisitatore).get());
@@ -176,10 +194,10 @@ public class ProvaController {
     }
     public Date creaData (String data) throws ParseException {
         Date date1;
-        if(data.length()>8)
-            date1=new SimpleDateFormat("dd-MM-yyyy").parse(data);
+        if(data.contains("/"))
+            date1=new SimpleDateFormat("dd/MM/yyyy").parse(data);
         else
-            date1=new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse("00-00-0000 "+data);
+            date1=new SimpleDateFormat("HH:mm").parse(data);
         return (date1);
     }
 

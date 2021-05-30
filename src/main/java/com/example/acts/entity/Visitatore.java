@@ -98,4 +98,8 @@ public class Visitatore {
     public void addStanza(Stanza s) {
         stanze.add(s);
     }
+
+    public void addGruppo(Gruppo g) {
+        this.gruppo=g;
+    }
 }
