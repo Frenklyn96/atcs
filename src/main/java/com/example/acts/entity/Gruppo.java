@@ -24,6 +24,8 @@ public class Gruppo {
     private Set<Stanza> stanze;
     @OneToMany
     private Set<Visitatore> visitatori;
+    @OneToMany
+    private Set<Posizione> posizione;
 
 
 
@@ -36,6 +38,14 @@ public class Gruppo {
         this.headphones = headphones;
         this.stanze=new HashSet<Stanza>();
         this.visitatori= new HashSet<Visitatore>();
+    }
+
+    public Set<Posizione> getPosizione() {
+        return posizione;
+    }
+
+    public void setPosizione(Set<Posizione> posizione) {
+        this.posizione = posizione;
     }
 
     public Set<Visitatore> getVisitatori() {

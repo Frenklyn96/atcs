@@ -1,24 +1,24 @@
 package com.example.acts.services;
 
-import com.example.acts.entity.Posizione;
-import com.example.acts.entity.Stanza;
-import com.example.acts.entity.Visitatore;
+import com.example.acts.entity.*;
 import com.example.acts.repository.PosizioneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PosizioneServices {
     @Autowired
     private PosizioneRepository posizioneRepository;
 
-    public Boolean addElem (Stanza stanza, Date oraInizio, Date oraFine, Visitatore visitatore){
+    public Boolean addElem (Stanza stanza, Date oraInizio, Date oraFine, Visitatore visitatore, Gruppo gruppo){
         try {
-            posizioneRepository.save(new Posizione(stanza,oraInizio,oraFine,visitatore));
+            posizioneRepository.save(new Posizione(stanza,oraInizio,oraFine,visitatore,gruppo));
         } catch (Exception e)
         {
             System.out.println("Error PosizioneServices "+e);
@@ -27,7 +27,10 @@ public class PosizioneServices {
         return true;
     }
 
-    public List<Posizione> getOre(Set<Stanza> stanze) {
-        return(posizioneRepository.findByidVisitatoreAndidStanza());
+    public List<RisultatoQuery> getByGroupOra(Gruppo gruppo){
+        return ( posizioneRepository.findByGruppoOra(gruppo));
+    }
+    public List<Posizione> getByGroup(Gruppo gruppo){
+        return(posizioneRepository.findByGruppo(gruppo));
     }
 }

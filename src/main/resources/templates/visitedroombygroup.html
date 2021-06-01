@@ -10,16 +10,21 @@
 <table>
     <thead>
     <tr>
-        <th> Stanze </th>
-        <th>Time</th>
+        <th>Id Stanza</th>
+        <th> Posizioni </th>
+        <th>OraInizio</th>
+        <th>OraFIne</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${stanze.empty}">
+    <tr th:if="${posizioni.empty}">
         <td colspan="2"> No Books Available </td>
     </tr>
-    <tr th:each="stanza : ${stanze}">
-        <td><span th:text="${stanza.}"> Title </span></td>
+    <tr th:each="posizione : ${posizioni}">
+        <td><span th:text="${posizione.stanza.id}"> Title </span></td>
+        <td><span th:text="${posizione.stanza.nome}"> Title </span></td>
+        <td><span th:text="${posizione.getOraInizioString()}"> Title</span> </span></td>
+        <td><span th:text="${posizione.getOraFineString()}"> Title </span></td>
     </tr>
     </tbody>
 </table>

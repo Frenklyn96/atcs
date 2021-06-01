@@ -21,15 +21,37 @@ public class Presentazione {
     private Date oraFine;
     @ManyToOne
     private Visitatore visitatore;
+    @NotNull
+    private int voto;
+    @NotBlank
+    private String interruzione;
 
 
     public Presentazione(){}
 
-    public Presentazione(Stanza stanza, Date oraInizio, Date oraFine,Visitatore visitatore) {
+    public Presentazione(Stanza stanza, Date oraInizio, Date oraFine,Visitatore visitatore, int voto, String interruzione) {
         this.stanza = stanza;
         this.oraInizio = oraInizio;
         this.oraFine=oraFine;
         this.visitatore=visitatore;
+        this.voto=voto;
+        this.interruzione=interruzione;
+    }
+
+    public int getVoto() {
+        return voto;
+    }
+
+    public void setVoto(int voto) {
+        this.voto = voto;
+    }
+
+    public String getInterruzione() {
+        return interruzione;
+    }
+
+    public void setInterruzione(String interruzione) {
+        this.interruzione = interruzione;
     }
 
     public Long getId() {

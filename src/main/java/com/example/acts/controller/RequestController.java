@@ -1,5 +1,7 @@
 package com.example.acts.controller;
 
+import com.example.acts.entity.Gruppo;
+import com.example.acts.entity.Posizione;
 import com.example.acts.entity.Visitatore;
 import com.example.acts.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class RequestController {
@@ -25,10 +30,8 @@ public class RequestController {
     @RequestMapping("/groupSummuary/{id}")
     public String prova(@PathVariable("id")Long idGruppo, Model model)
     {
-        model.addAttribute("stanze",gruppoServices.getGruppo(idGruppo).get().getStanze());
-        Optional<Visitatore> visitatori = visitatoreServices.getVisitaotoreByGroup(idGruppo);
-        presentazioneServices.getTempo (visitatori,gruppoServices.getGruppo(idGruppo).get().getStanze());
-        model.addAttribute("tempoStanze",posizioneServices.getOre (gruppoServices.getGruppo(idGruppo).get().getStanze()));
+
+        model.addAttribute("posizioni",posizioneServices.getByGroupOra(gruppoServices.getGruppo(idGruppo).get()));
         return "visitedroombygroup";
     }
 

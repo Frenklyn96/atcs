@@ -153,7 +153,7 @@ public class DbController {
                     aggiungiStanzaVisitatore(nextLine[2],idVisitatore);
                     aggiungiStanzaGruppo(idGruppo,nextLine[2]);
                 }
-                posizioneServices.addElem(stanzaServices.getStanza(nextLine[2]), creaData(nextLine[0]), creaData(nextLine[1]),visitatoreServices.getVisitatoreById(idVisitatore).get());
+                posizioneServices.addElem(stanzaServices.getStanza(nextLine[2]), creaData(nextLine[0]), creaData(nextLine[1]),visitatoreServices.getVisitatoreById(idVisitatore).get(),gruppoServices.getGruppo(idGruppo).get());
                 nextLine = reader.readNext();
         }
     }
@@ -168,7 +168,7 @@ public class DbController {
                      aggiungiStanzaVisitatore(nextLine[2],idVisitatore);
                      aggiungiStanzaGruppo(idGruppo,nextLine[2]);
                  }
-                presentazioneServices.addElem(stanzaServices.getStanza(nextLine[2]), creaData(nextLine[0]), creaData(nextLine[1]),visitatoreServices.getVisitatoreById(idVisitatore).get());
+                presentazioneServices.addElem(stanzaServices.getStanza(nextLine[2]), creaData(nextLine[0]), creaData(nextLine[1]),visitatoreServices.getVisitatoreById(idVisitatore).get(),Integer.parseInt(nextLine[3]),nextLine[4]);
                 nextLine = reader.readNext();
         }
     }
