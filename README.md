@@ -1,5 +1,11 @@
 # Towards Lifelong Cultural Heritage Experience 
-## General description:
+## Table of contents
+1. [General Description](#general-description)
+2. [Details](#details)
+3. [Material](#material)
+4. [Delivery](#delivery)
+
+## 1. General description:
 The assignment is planned for teams of two. It will replicate a study that was published at PUC (reference below + appears at the data directory) – so you may follow the ideas there – or better – be more creative<sup>[1]</sup>.  
 You will get visit logs and will be asked to do two things:
 * analyze the logs and present information to the museum curator
@@ -8,7 +14,7 @@ You will get visit logs and will be asked to do two things:
 Consider following the Model-View-Controller (MVC) design/architectural pattern.
 Language/development environment – whatever you like.  
 
-## Details
+## 2. Details
 You are requested to develop a Web-based system that, given a museum floor plan and a set of visit logs of groups of different sizes, will enable its user to:
 1. “play back” a visit of a selected group (or individual) – see how they moved around in the museum between exhibits, when it is possible to speed up the visit.
 2. Create a visit summary for a selected group/individual
@@ -32,13 +38,13 @@ For the project you need to:
 * Enable the presentation of visitors’ behavior statistics (as noted above and any creative idea you may have).
 * Write a summary report
 
-## Material
+## 3. Material
 For that you get:
 * A museum floor plan with names of POIs (enlarge to see) + an excel file with some corrections.
 * Visit logs – timestamped positions visited, timestamped presentations viewed with an indication if they ended normally (by the system) or terminated by the user and a list of time stamped events (less relevant).
 * An excel file that associates the visitor number (“A” column, log file number) with the visitor’s group (“B” column) other columns are not relevant.
 
-## Delivery
+## 4. Delivery
 I need a link to get a project report + a web-based system (for playback) + a user guide (better to have online help).  
 Deliverables:
 1. Project report
