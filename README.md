@@ -1,6 +1,6 @@
 # Towards Lifelong Cultural Heritage Experience 
 ## General description:
-The assignment is planned for teams of two. It will replicate a study that was published at PUC (reference below + appears at the data directory) – so you may follow the ideas there – or better – be more creative[^1].  
+The assignment is planned for teams of two. It will replicate a study that was published at PUC (reference below + appears at the data directory) – so you may follow the ideas there – or better – be more creative<sup>[1]</sup>.  
 You will get visit logs and will be asked to do two things:
 * analyze the logs and present information to the museum curator
 * create a “play back” system that will allow re-constructing of a museum visit using the time-tagged data in the log.
@@ -51,4 +51,4 @@ Deliverables:
     * Analyze visitors’ behavior
         * Various statistics as described above
 
-[^1]: https://doi.org/10.1007/s00779-016-0994-9 "Lanir, J., Kuflik, T., Sheidin, J., Yavin, N., Leiderman, K., & Segal, M. (2017). Visualizing museum visitors’ behavior: Where do they go and what do they do there?. Personal and Ubiquitous Computing, 21(2), 313-326."
+[1]: https://doi.org/10.1007/s00779-016-0994-9 "Lanir, J., Kuflik, T., Sheidin, J., Yavin, N., Leiderman, K., & Segal, M. (2017). Visualizing museum visitors’ behavior: Where do they go and what do they do there?. Personal and Ubiquitous Computing, 21(2), 313-326."
