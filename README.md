@@ -1,9 +1,9 @@
 # Towards Lifelong Cultural Heritage Experience 
 ## Table of contents
-1. [General Description](#general-description)
-2. [Details](#details)
-3. [Material](#material)
-4. [Delivery](#delivery)
+1. [General Description](#1-general-description)
+2. [Details](#2-details)
+3. [Material](#3-material)
+4. [Delivery](#4-delivery)
 
 ## 1. General description:
 The assignment is planned for teams of two. It will replicate a study that was published at PUC (reference below + appears at the data directory) – so you may follow the ideas there – or better – be more creative<sup>[1]</sup>.  
