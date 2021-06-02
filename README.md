@@ -4,6 +4,7 @@
 2. [Details](#2-details)
 3. [Material](#3-material)
 4. [Delivery](#4-delivery)
+5. [Requirements](#5-requirements)
 
 ## 1. General description:
 The assignment is planned for teams of two. It will replicate a study that was published at PUC (reference below + appears at the data directory) – so you may follow the ideas there – or better – be more creative<sup>[1]</sup>.  
@@ -56,5 +57,7 @@ Deliverables:
     * Re-play (playback) visit for selected individuals/groups
     * Analyze visitors’ behavior
         * Various statistics as described above
+
+## 5 Requirements
 
 [1]: https://doi.org/10.1007/s00779-016-0994-9 "Lanir, J., Kuflik, T., Sheidin, J., Yavin, N., Leiderman, K., & Segal, M. (2017). Visualizing museum visitors’ behavior: Where do they go and what do they do there?. Personal and Ubiquitous Computing, 21(2), 313-326."
