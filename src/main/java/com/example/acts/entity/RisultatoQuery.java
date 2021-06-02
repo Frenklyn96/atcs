@@ -2,7 +2,7 @@ package com.example.acts.entity;
 
 import java.util.Date;
 
-public class RisultatoQuery {
+public class RisultatoQuery{
     private Long id;
     private Date oraInizio;
     private Date oraFine;
@@ -75,5 +75,15 @@ public class RisultatoQuery {
             a= String.valueOf(oraFine.getHours()+":"+String.valueOf(oraFine.getMinutes()));
 
         return(a);
+    }
+
+    public String getTempoTotale(){
+        int ore=(oraFine.getHours()-oraInizio.getHours())*60*60;
+        int minuti=(oraFine.getMinutes()-oraInizio.getMinutes())*60;
+        int secondi= oraFine.getSeconds()-oraInizio.getSeconds();
+
+
+
+        return(String.valueOf(ore+minuti+secondi)+" sec.");
     }
 }

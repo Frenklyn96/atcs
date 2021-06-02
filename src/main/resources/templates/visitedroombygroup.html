@@ -12,8 +12,9 @@
     <tr>
         <th>Id Stanza</th>
         <th> Posizioni </th>
-        <th>OraInizio</th>
-        <th>OraFIne</th>
+        <th>Ora Inizio</th>
+        <th>Ora Fine</th>
+        <th>Tempo</th>
     </tr>
     </thead>
     <tbody>
@@ -25,6 +26,7 @@
         <td><span th:text="${posizione.stanza.nome}"> Title </span></td>
         <td><span th:text="${posizione.getOraInizioString()}"> Title</span> </span></td>
         <td><span th:text="${posizione.getOraFineString()}"> Title </span></td>
+        <td><span th:text="${posizione.getTempoTotale()}">Title</span></td>
     </tr>
     </tbody>
 </table>

@@ -34,6 +34,8 @@ public class Posizione {
         this.gruppo=gruppo;
     }
 
+
+
     public Gruppo getGruppo() {
 
         return gruppo;
