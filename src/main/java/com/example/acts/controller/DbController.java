@@ -1,6 +1,7 @@
 package com.example.acts.controller;
 
 import com.example.acts.entity.Gruppo;
+import com.example.acts.entity.Posizione;
 import com.example.acts.entity.Stanza;
 import com.example.acts.entity.Visitatore;
 import com.example.acts.services.*;
@@ -154,6 +155,7 @@ public class DbController {
                     aggiungiStanzaGruppo(idGruppo,nextLine[2]);
                 }
                 posizioneServices.addElem(stanzaServices.getStanza(nextLine[2]), creaData(nextLine[0]), creaData(nextLine[1]),visitatoreServices.getVisitatoreById(idVisitatore).get(),gruppoServices.getGruppo(idGruppo).get());
+                gruppoServices.getGruppo(idGruppo).get().addPosizione(posizioneServices.getLast());
                 nextLine = reader.readNext();
         }
     }
@@ -162,13 +164,13 @@ public class DbController {
         String[] nextLine;
         nextLine = reader.readNext();
         while ((nextLine[0].length()!=0)&&(nextLine!=null)) {
-                if (!stanzaServices.EsisteStanza(nextLine[2]))
+              /*  if (!stanzaServices.EsisteStanza(nextLine[2]))
                  {
                      stanzaServices.addElem(nextLine[2]);
                      aggiungiStanzaVisitatore(nextLine[2],idVisitatore);
                      aggiungiStanzaGruppo(idGruppo,nextLine[2]);
-                 }
-                presentazioneServices.addElem(stanzaServices.getStanza(nextLine[2]), creaData(nextLine[0]), creaData(nextLine[1]),visitatoreServices.getVisitatoreById(idVisitatore).get(),Integer.parseInt(nextLine[3]),nextLine[4]);
+                 }*/
+                presentazioneServices.addElem(nextLine[2], creaData(nextLine[0]), creaData(nextLine[1]),visitatoreServices.getVisitatoreById(idVisitatore).get(),Integer.parseInt(nextLine[3]),nextLine[4]);
                 nextLine = reader.readNext();
         }
     }

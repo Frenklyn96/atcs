@@ -9,10 +9,10 @@ import java.util.Date;
 public class Presentazione {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long Id;
+    private Long id;
 
-    @OneToOne
-    private Stanza stanza;
+    @NotBlank
+    public String nome;
 
     @NotNull
     private Date oraInizio;
@@ -29,14 +29,16 @@ public class Presentazione {
 
     public Presentazione(){}
 
-    public Presentazione(Stanza stanza, Date oraInizio, Date oraFine,Visitatore visitatore, int voto, String interruzione) {
-        this.stanza = stanza;
+    public Presentazione(String nome, Date oraInizio, Date oraFine,Visitatore visitatore, int voto, String interruzione) {
+        this.nome = nome;
         this.oraInizio = oraInizio;
         this.oraFine=oraFine;
         this.visitatore=visitatore;
         this.voto=voto;
         this.interruzione=interruzione;
     }
+
+
 
     public int getVoto() {
         return voto;
@@ -55,19 +57,11 @@ public class Presentazione {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
-    }
-
-    public Stanza getStanza() {
-        return stanza;
-    }
-
-    public void setStanza(Stanza stanza) {
-        this.stanza = stanza;
+        id = id;
     }
 
     public Date getOraInizio() {

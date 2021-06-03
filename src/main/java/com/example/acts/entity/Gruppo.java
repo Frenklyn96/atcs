@@ -21,11 +21,14 @@ public class Gruppo {
     @NotNull
     private Boolean headphones;
     @ManyToMany
+    @JoinTable(name="gruppo_stanze",
+    joinColumns = @JoinColumn(name="gruppo_id"),
+    inverseJoinColumns = @JoinColumn(name="stanza_id"))
     private Set<Stanza> stanze;
     @OneToMany
     private Set<Visitatore> visitatori;
     @OneToMany
-    private Set<Posizione> posizione;
+    private Set<Posizione> posizioni;
 
 
 
@@ -38,14 +41,18 @@ public class Gruppo {
         this.headphones = headphones;
         this.stanze=new HashSet<Stanza>();
         this.visitatori= new HashSet<Visitatore>();
+        this.posizioni=new HashSet<Posizione>();
     }
 
+    public void addPosizione (Posizione p){
+        posizioni.add(p);
+    }
     public Set<Posizione> getPosizione() {
-        return posizione;
+        return posizioni;
     }
 
-    public void setPosizione(Set<Posizione> posizione) {
-        this.posizione = posizione;
+    public void setPosizione(Set<Posizione> posizioni) {
+        this.posizioni = posizioni;
     }
 
     public Set<Visitatore> getVisitatori() {

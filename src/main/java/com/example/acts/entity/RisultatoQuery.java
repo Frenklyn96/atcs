@@ -8,7 +8,7 @@ public class RisultatoQuery{
     private Date oraFine;
     private Gruppo gruppo;
     private Stanza stanza;
-    private Visitatore visitatore;
+    private String presentazione;
 
     public RisultatoQuery(Long id, Date oraInizio, Date oraFine, Gruppo gruppo, Stanza stanza) {
         this.id = id;
@@ -18,15 +18,25 @@ public class RisultatoQuery{
         this.stanza = stanza;
     }
 
-    public RisultatoQuery(Long id, Date oraInizio, Date oraFine, Visitatore visitatore, Stanza stanza) {
+    public RisultatoQuery(Long id, Date oraInizio, Date oraFine, String presentazione) {
         this.id = id;
         this.oraInizio = oraInizio;
         this.oraFine = oraFine;
-        this.visitatore=visitatore;
-        this.stanza = stanza;
+        this.presentazione=presentazione;
     }
 
 
+
+
+
+
+    public String getPresentazione() {
+        return presentazione;
+    }
+
+    public void setPresentazione(String presentazione) {
+        this.presentazione = presentazione;
+    }
 
     public Long getId() {
         return id;
@@ -86,13 +96,13 @@ public class RisultatoQuery{
         return(a);
     }
 
-    public String getTempoTotale(){
+    public int getTempoTotale(){
         int ore=(oraFine.getHours()-oraInizio.getHours())*60*60;
         int minuti=(oraFine.getMinutes()-oraInizio.getMinutes())*60;
         int secondi= oraFine.getSeconds()-oraInizio.getSeconds();
 
 
 
-        return(String.valueOf(ore+minuti+secondi)+" sec.");
+        return(ore+minuti+secondi);
     }
 }

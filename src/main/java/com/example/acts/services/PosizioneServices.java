@@ -7,9 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class PosizioneServices {
@@ -36,4 +33,10 @@ public class PosizioneServices {
     public List<RisultatoQuery> getByVisitatoreOra(Visitatore visitatore){
         return(posizioneRepository.findByVisitatoreOra(visitatore));
     }
+
+    public Posizione getLast() {
+        return(posizioneRepository.findTopByOrderByIdDesc());
+
+    }
+
 }

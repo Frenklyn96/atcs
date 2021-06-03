@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Getting Started: Serving Web Content</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+
+<table>
+  <thead>
+  <tr>
+    <th>Id Stanza</th>
+    <th> Posizioni </th>
+    <th>Ora Inizio</th>
+    <th>Ora Fine</th>
+    <th>Tempo</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:if="${posizioni.empty}">
+    <td colspan="2"> No Books Available </td>
+  </tr>
+  <tr th:each="posizione : ${posizioni}">
+    <td><span th:text="${posizione.id}"> Title </span></td>
+    <td><span th:text="${posizione.getOraInizioString()}"> Title</span> </span></td>
+    <td><span th:text="${posizione.getOraFineString()}"> Title </span></td>
+    <td><span th:text="${posizione.getTempoTotale()}">Title</span></td>
+  </tr>
+  </tbody>
+
+
+
+</body>
+</html>

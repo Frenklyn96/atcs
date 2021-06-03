@@ -21,6 +21,9 @@ public class Visitatore {
     @OneToMany(mappedBy = "visitatore")
     private Set<Posizione> posizioni;
     @ManyToMany
+    @JoinTable(name = "visitatore_stanze",
+            joinColumns = @JoinColumn(name = "visitatore_id"),
+            inverseJoinColumns = @JoinColumn(name = "stanze_id"))
     private Set<Stanza> stanze;
 
     public Visitatore(){}

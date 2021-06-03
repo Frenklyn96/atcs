@@ -14,9 +14,9 @@ public class PresentazioneServices {
     @Autowired
     private PresentazioneRepository presentazioneRepository;
 
-    public Boolean addElem (Stanza stanza, Date oraInizio, Date oraFine, Visitatore visitatore,int voto, String interruzione){
+    public Boolean addElem (String nome, Date oraInizio, Date oraFine, Visitatore visitatore,int voto, String interruzione){
         try {
-            presentazioneRepository.save(new Presentazione(stanza,oraInizio,oraFine,visitatore,voto,interruzione));
+            presentazioneRepository.save(new Presentazione(nome,oraInizio,oraFine,visitatore,voto,interruzione));
         } catch (Exception e)
         {
             System.out.println("Error PresentazioneServices "+e);
@@ -25,12 +25,8 @@ public class PresentazioneServices {
         return true;
     }
 
-    public List<Presentazione> getByVisitatoreOra(Visitatore visitatore) {
+    public List<RisultatoQuery> getByVisitatoreOra(Visitatore visitatore) {
         return(presentazioneRepository.findByVisitatoreOra(visitatore));
     }
 
-
-    /*public List<Posizione> getPosizioniByGruppo(Long idGruppo) {
-        return(presentazioneRepository.findByidGruppo(idGruppo));
-    }*/
 }

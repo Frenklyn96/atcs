@@ -20,10 +20,10 @@ public class Stanza {
     @NotBlank
     private String nome;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "stanze")
     private Set<Visitatore> visitatori;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "stanze")
     private Set<Gruppo> gruppi;
 
     public Stanza(){}

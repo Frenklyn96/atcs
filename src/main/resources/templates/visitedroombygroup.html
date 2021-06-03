@@ -29,6 +29,17 @@
         <td><span th:text="${posizione.getTempoTotale()}">Title</span></td>
     </tr>
     </tbody>
+    <tbody>
+    <tr th:if="${presentazioni.empty}">
+        <td colspan="2"> No Books Available </td>
+    </tr>
+    <tr th:each="presentazione : ${presentazioni}">
+        <td><span th:text="${presentazione.presentazione}"> Title </span></td>
+        <td><span th:text="${presentazione.getOraInizioString()}"> Title </span></td>
+        <td><span th:text="${presentazione.getOraFineString()}"> Title</span> </span></td>
+        <td><span th:text="${presentazione.getTempoTotale()}"> Title</span> </span></td>
+    </tr>
+    </tbody>
 </table>
 
 
