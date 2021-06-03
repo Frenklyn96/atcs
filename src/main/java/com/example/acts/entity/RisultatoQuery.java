@@ -8,12 +8,21 @@ public class RisultatoQuery{
     private Date oraFine;
     private Gruppo gruppo;
     private Stanza stanza;
+    private Visitatore visitatore;
 
     public RisultatoQuery(Long id, Date oraInizio, Date oraFine, Gruppo gruppo, Stanza stanza) {
         this.id = id;
         this.oraInizio = oraInizio;
         this.oraFine = oraFine;
         this.gruppo = gruppo;
+        this.stanza = stanza;
+    }
+
+    public RisultatoQuery(Long id, Date oraInizio, Date oraFine, Visitatore visitatore, Stanza stanza) {
+        this.id = id;
+        this.oraInizio = oraInizio;
+        this.oraFine = oraFine;
+        this.visitatore=visitatore;
         this.stanza = stanza;
     }
 

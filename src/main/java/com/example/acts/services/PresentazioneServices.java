@@ -25,6 +25,10 @@ public class PresentazioneServices {
         return true;
     }
 
+    public List<Presentazione> getByVisitatoreOra(Visitatore visitatore) {
+        return(presentazioneRepository.findByVisitatoreOra(visitatore));
+    }
+
 
     /*public List<Posizione> getPosizioniByGruppo(Long idGruppo) {
         return(presentazioneRepository.findByidGruppo(idGruppo));

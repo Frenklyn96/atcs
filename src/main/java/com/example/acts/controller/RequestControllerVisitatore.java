@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
-public class RequestController {
+public class RequestControllerVisitatore {
     @Autowired
     private PresentazioneServices presentazioneServices;
     @Autowired
@@ -27,20 +27,15 @@ public class RequestController {
     @Autowired
     private VisitatoreServices visitatoreServices;
 
-    @RequestMapping("/groupSummuary/{id}")
-    public String prova(@PathVariable("id")Long idGruppo, Model model)
+    @RequestMapping("/visitorSummuary/{id}")
+    public String prova(@PathVariable("id")Long idVisitatore, Model model)
     {
 
-        model.addAttribute("posizioni",posizioneServices.getByGroupOra(gruppoServices.getGruppo(idGruppo).get()));
+        model.addAttribute("posizioni",posizioneServices.getByVisitatoreOra(visitatoreServices.getVisitatoreById(idVisitatore).get()));
+        model.addAttribute("presentazioni",presentazioneServices.getByVisitatoreOra(visitatoreServices.getVisitatoreById(idVisitatore).get()));
         return "visitedroombygroup";
     }
 
-    @GetMapping("/greeting")
-
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "visitedroombygroup";
-    }
 
 
 }

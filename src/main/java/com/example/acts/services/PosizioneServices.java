@@ -33,4 +33,7 @@ public class PosizioneServices {
     public List<Posizione> getByGroup(Gruppo gruppo){
         return(posizioneRepository.findByGruppo(gruppo));
     }
+    public List<RisultatoQuery> getByVisitatoreOra(Visitatore visitatore){
+        return(posizioneRepository.findByVisitatoreOra(visitatore));
+    }
 }
