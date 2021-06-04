@@ -9,6 +9,8 @@ public class RisultatoQuery{
     private Gruppo gruppo;
     private Stanza stanza;
     private String presentazione;
+    private int voto;
+    private String interruzione;
 
     public RisultatoQuery(Long id, Date oraInizio, Date oraFine, Gruppo gruppo, Stanza stanza) {
         this.id = id;
@@ -18,17 +20,31 @@ public class RisultatoQuery{
         this.stanza = stanza;
     }
 
-    public RisultatoQuery(Long id, Date oraInizio, Date oraFine, String presentazione) {
+    public int getVoto() {
+        return voto;
+    }
+
+    public void setVoto(int voto) {
+        this.voto = voto;
+    }
+
+    public RisultatoQuery(Long id, Date oraInizio, Date oraFine, String presentazione, int voto, String interruzione) {
         this.id = id;
         this.oraInizio = oraInizio;
         this.oraFine = oraFine;
         this.presentazione=presentazione;
+        this.voto=voto;
+        this.interruzione=interruzione;
     }
 
 
+    public String getInterruzione() {
+        return interruzione;
+    }
 
-
-
+    public void setInterruzione(String interruzione) {
+        this.interruzione = interruzione;
+    }
 
     public String getPresentazione() {
         return presentazione;

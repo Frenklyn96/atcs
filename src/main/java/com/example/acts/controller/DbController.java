@@ -1,7 +1,6 @@
 package com.example.acts.controller;
 
 import com.example.acts.entity.Gruppo;
-import com.example.acts.entity.Posizione;
 import com.example.acts.entity.Stanza;
 import com.example.acts.entity.Visitatore;
 import com.example.acts.services.*;
@@ -119,6 +118,7 @@ public class DbController {
                     else if (nextLine[0].equals("presentations "))
                         RiempiPresentatione(reader,idVisitatore,idGruppo);
                 }
+                reader.close();
 
             }
         }
@@ -144,13 +144,26 @@ public class DbController {
         visitatoreServices.save(v);
     }
 
+    public Long trovaIdStanzaPresentazione (String nome) throws IOException {
+        Long ris=0L;
+        CSVReader reader = new CSVReader(new FileReader("C:\\Users\\marco\\Downloads\\02_Seminario\\02_Seminario\\Museum Data\\Stanze.csv"),';', '"');
+        String[] nextLine;
+        while ((nextLine = reader.readNext()) != null) {
+            if(nome.equals(nextLine[2]))
+                ris=Long.parseLong(nextLine[0]);
+        }
+        reader.close();
+        System.out.println(ris);
+        return (ris);
+    }
+
     public void RiempiPosizioni(CSVReader reader,Long idVisitatore,Long idGruppo) throws IOException, ParseException {
         String[] nextLine;
         nextLine = reader.readNext();
         while ((nextLine[0].length()!=0)&&(nextLine!=null)) {
                 if (!stanzaServices.EsisteStanza(nextLine[2]))
                 {
-                    stanzaServices.addElem(nextLine[2]);
+                    stanzaServices.addElem(trovaIdStanzaPresentazione(nextLine[2]),nextLine[2]);
                     aggiungiStanzaVisitatore(nextLine[2],idVisitatore);
                     aggiungiStanzaGruppo(idGruppo,nextLine[2]);
                 }
@@ -170,7 +183,7 @@ public class DbController {
                      aggiungiStanzaVisitatore(nextLine[2],idVisitatore);
                      aggiungiStanzaGruppo(idGruppo,nextLine[2]);
                  }*/
-                presentazioneServices.addElem(nextLine[2], creaData(nextLine[0]), creaData(nextLine[1]),visitatoreServices.getVisitatoreById(idVisitatore).get(),Integer.parseInt(nextLine[3]),nextLine[4]);
+                presentazioneServices.addElem(trovaIdStanzaPresentazione(nextLine[2]),nextLine[2], creaData(nextLine[0]), creaData(nextLine[1]),visitatoreServices.getVisitatoreById(idVisitatore).get(),Integer.parseInt(nextLine[3]),nextLine[4]);
                 nextLine = reader.readNext();
         }
     }

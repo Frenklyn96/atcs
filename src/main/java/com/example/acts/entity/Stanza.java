@@ -14,7 +14,6 @@ import java.util.Set;
 public class Stanza {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank
@@ -28,7 +27,8 @@ public class Stanza {
 
     public Stanza(){}
 
-    public Stanza(String nome) {
+    public Stanza(Long id,String nome) {
+        this.id=id;
         this.nome = nome;
         this.visitatori = new HashSet<Visitatore>();
         this.gruppi=new HashSet<Gruppo>();

@@ -12,6 +12,9 @@ public class Presentazione {
     private Long id;
 
     @NotBlank
+    public Long idPresentazione;
+
+    @NotBlank
     public String nome;
 
     @NotNull
@@ -29,7 +32,8 @@ public class Presentazione {
 
     public Presentazione(){}
 
-    public Presentazione(String nome, Date oraInizio, Date oraFine,Visitatore visitatore, int voto, String interruzione) {
+    public Presentazione(Long id,String nome, Date oraInizio, Date oraFine,Visitatore visitatore, int voto, String interruzione) {
+        this.idPresentazione=id;
         this.nome = nome;
         this.oraInizio = oraInizio;
         this.oraFine=oraFine;
@@ -38,7 +42,21 @@ public class Presentazione {
         this.interruzione=interruzione;
     }
 
+    public Long getIdPresentazione() {
+        return idPresentazione;
+    }
 
+    public void setIdPresentazione(Long idPresentazione) {
+        this.idPresentazione = idPresentazione;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public int getVoto() {
         return voto;
@@ -87,4 +105,14 @@ public class Presentazione {
     public void setVisitatore(Visitatore visitatore) {
         this.visitatore = visitatore;
     }
+    public int getTempoTotale(){
+        int ore=(oraFine.getHours()-oraInizio.getHours())*60*60;
+        int minuti=(oraFine.getMinutes()-oraInizio.getMinutes())*60;
+        int secondi= oraFine.getSeconds()-oraInizio.getSeconds();
+
+
+
+        return(ore+minuti+secondi);
+    }
+
 }

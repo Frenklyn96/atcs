@@ -10,9 +10,9 @@ public class StanzaServices {
     @Autowired
     private StanzaRepository stanzaRepository;
 
-    public boolean addElem (String nome) {
+    public boolean addElem (Long id, String nome) {
         try {
-        stanzaRepository.save(new Stanza(nome));
+        stanzaRepository.save(new Stanza(id,nome));
         }catch (Exception e) {
             System.out.println("Error in StanzaServices: "+e);
             return false;
