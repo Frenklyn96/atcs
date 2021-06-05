@@ -35,4 +35,8 @@ public class PresentazioneServices {
     public List<Presentazione> findByName(String presentazione){
         return (presentazioneRepository.findByNome(presentazione));
     }
+
+    public List<RisultatoQuery> geALL() {
+        return (presentazioneRepository.trovaRisQuery());
+    }
 }

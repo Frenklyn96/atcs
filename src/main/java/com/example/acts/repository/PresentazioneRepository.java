@@ -19,4 +19,7 @@ public interface PresentazioneRepository extends JpaRepository<Presentazione,Lon
 
 
     List<Presentazione> findByNome(String presentazione);
+
+    @Query("SELECT new com.example.acts.entity.RisultatoQuery(p.idPresentazione,p.oraInizio,p.oraFine,p.nome,p.voto,p.interruzione) FROM Presentazione AS p")
+    List<RisultatoQuery> trovaRisQuery();
 }

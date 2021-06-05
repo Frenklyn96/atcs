@@ -11,7 +11,7 @@ public class Presentazione {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank
+    @NotNull
     public Long idPresentazione;
 
     @NotBlank

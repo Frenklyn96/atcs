@@ -28,4 +28,7 @@ public interface PosizioneRepository extends JpaRepository<Posizione,Long> {
 
     Posizione findTopByOrderByIdDesc();
 
+    @Query("SELECT new com.example.acts.entity.RisultatoQuery(p.stanza.id, p.oraInizio, p.oraFine,p.gruppo,p.stanza) " +
+            "FROM Posizione AS p")
+    List<RisultatoQuery> trovaRisQuery();
 }

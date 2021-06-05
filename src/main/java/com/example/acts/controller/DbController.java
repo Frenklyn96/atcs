@@ -153,7 +153,6 @@ public class DbController {
                 ris=Long.parseLong(nextLine[0]);
         }
         reader.close();
-        System.out.println(ris);
         return (ris);
     }
 

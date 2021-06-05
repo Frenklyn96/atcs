@@ -39,4 +39,7 @@ public class PosizioneServices {
 
     }
 
+    public List<RisultatoQuery> getAll() {
+        return(posizioneRepository.trovaRisQuery());
+    }
 }

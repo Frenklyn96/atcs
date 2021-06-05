@@ -23,8 +23,6 @@
   </tr>
   <tr th:each="posizione : ${posizioni}">
     <td><span th:text="${posizione.id}"> Title </span></td>
-    <td><span th:text="${posizione.getOraInizioString()}"> Title</span> </span></td>
-    <td><span th:text="${posizione.getOraFineString()}"> Title </span></td>
     <td><span th:text="${posizione.getTempoTotale()}">Title</span></td>
   </tr>
   </tbody>
