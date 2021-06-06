@@ -3,21 +3,39 @@
 <html lang="it">
     <head>
         <title>ATCS</title>
-        <script src="../static/js/d3.js"></script>
-        <script src="../static/js/jquery-3.6.0.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+        <script th:src="@{/js/lib/d3.js}"></script>
+        <script th:src="@{/js/lib/jquery-3.6.0.min.js}"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
+        
         <div class="topnav">
             <a class="active" href="">Home</a>
             <a href="">News</a>
             <a href="">Contatti</a>
             <a href="">Info</a>
         </div>
-        <button id="replay">Click me</button>
-        <div class="main"></div>
+        
+        
+        <div class="main">
+            <div class="svg-container">
+                <h1>Replay</h1>
+                <p>Ciao a tutti! ${value}</p>
+                <button id="replay">Start Replay</button>
+                <br><br>
+                <span>Replay speed:</span>
+                <input type="range" min="25" max="200" step=25 value="100" class="slider" id="myRange" onchange="listen()">
+                <span id="speed">1x</span>
+                <br><br>
+                <span>Select Visitor ID: </span>
+                <select name="visitor" id="visitorSelect">
+                    <option value="data1" selected="selected">data1</option>
+                    <option value="data2">data2</option>
+                    <option value="data3">data3</option>
+                </select>
+            </div>
         </div>
-        <script src="../static/js/playback.js"></script>
+        <script th:src="@{/js/src/playback.js}"></script>
     </body>
 </html>
 
