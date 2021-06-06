@@ -42,7 +42,8 @@ public class RequestMuseumController {
             contaVisitatoriPerOra.put(String.valueOf (Integer.valueOf(x.getOraInizio().getHours())+" "+x.getStanza().getId().intValue()),contaVisitatoriPerOra.get(String.valueOf (Integer.valueOf(x.getOraInizio().getHours())+" "+x.getStanza().getId().intValue())+1));
         }
 
-
+        model.addAttribute("conta",conta);
+        model.addAttribute("contaVisitatoriPerOra",contaVisitatoriPerOra);
 
         return("museumData");
     }
