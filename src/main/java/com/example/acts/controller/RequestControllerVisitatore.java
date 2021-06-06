@@ -31,6 +31,7 @@ public class RequestControllerVisitatore {
         return("visitatoriId");
     }
 
+    //Ritorno Summuary visitatori
     @RequestMapping("/visitorSummuary/{id}")
     public String prova(@PathVariable("id")Long idVisitatore, Model model)
     {   Double avgTempo,avgVoto;

@@ -26,17 +26,15 @@ public class RequestControllerGroup {
     private StanzaServices stanzaServices;
     @Autowired
     private VisitatoreServices visitatoreServices;
-
+//Ritorna summary dei gruppi
     @RequestMapping("/groupSummuary/{id}")
     public String prova(@PathVariable("id")Long idGruppo, Model model)
     {
-
         model.addAttribute("posizioni",posizioneServices.getByGroupOra(gruppoServices.getGruppo(idGruppo).get()));
         return "visitedroombygroup";
     }
 
     @GetMapping("/greeting")
-
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
         return "visitedroombygroup";
