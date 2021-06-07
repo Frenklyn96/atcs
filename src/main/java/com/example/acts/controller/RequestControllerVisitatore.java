@@ -25,14 +25,14 @@ public class RequestControllerVisitatore {
     private VisitatoreServices visitatoreServices;
 
     //Restituisce tutti i visitatori nel db
-    @RequestMapping("/visitatoriId")
+    @RequestMapping(value = "/lista" )
     public String tuttiVisitatoriId(Model model){
         model.addAttribute("visitatori",visitatoreServices.getAllVisitatori());
-        return("visitatoriId");
+        return("lista");
     }
 
     //Ritorno Summuary visitatori
-    @RequestMapping("/visitorSummuary/{id}")
+    @RequestMapping(value = "/visitorSummuary/{id}")
     public String prova(@PathVariable("id")Long idVisitatore, Model model)
     {   Double avgTempo,avgVoto;
         List<Presentazione> temp;
@@ -65,7 +65,7 @@ public class RequestControllerVisitatore {
 
     //todo restituisci json con presentazione e posizione in ordine di data e tempo con relativo tempo in secondi ciascuno
     //per ogni visitatore
-    @RequestMapping("/animazione/{id}")
+    @RequestMapping("/playback/{id}")
     public String animazione(@PathVariable("id") Long idVisitatore, Model model)
     {
         List<RisultatoQuery> a = posizioneServices.getByVisitatoreOra(visitatoreServices.getVisitatoreById(idVisitatore).get());
@@ -78,7 +78,7 @@ public class RequestControllerVisitatore {
             }
         });
         model.addAttribute("posizioni",a);
-        return("/animazione");
+        return "/playback";
     }
 
 

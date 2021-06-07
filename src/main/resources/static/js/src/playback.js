@@ -1,5 +1,5 @@
+rangeBar = document.getElementById("myRange");
 document.getElementById("replay").addEventListener("click", replay);
-rangeBar = document.getElementById("myRange"); 
 selectTag = document.getElementById("visitorSelect");
 
 /* Aggiungere nuovi elementi allla lista delle opzioni
