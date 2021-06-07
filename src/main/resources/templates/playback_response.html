@@ -1,0 +1,59 @@
+<!doctype html>
+<meta charset="utf-8">
+<html lang="it">
+
+<head>
+    <title>ATCS - Play Back</title>
+    <script th:src="@{/js/lib/d3.js}"></script>
+    <script th:src="@{/js/lib/jquery-3.6.0.min.js}"></script>
+    <link rel="stylesheet" type="text/css" th:href="
+        @{/css/style.css}">
+</head>
+
+<body>
+
+    <div class="topnav">
+        <a class="active" href="">Home</a>
+        <a href="">Play Back</a>
+        <a href="">Museum Statistics</a>
+        <a href="">Assignment</a>
+    </div>
+
+
+    <div class="main">
+        <div class="svg-container">
+            <h1>Play back</h1>
+            <p>Ciao a tutti! ${value}</p>
+            <button onclick="location.href='AGGIUNGERE QUI (TRA APICI SINGOLI) IL LINK ALLA PAGINE DELLA SIMULAZIONE';">Go Back</button>
+            <br><br>
+            <span>Replay speed:</span>
+            <input type="range" min="25" max="200" step=25 value="100" class="slider" id="myRange" onchange="listen()">
+            <span id="speed">1x</span>
+            <br><br>
+            <button id="replay">Play again</button>
+        </div>
+    </div>
+    <script th:src="@{/js/src/playback.js}"></script>
+
+    <!-- una volta seleionato l'id del visitatore bisogna stampare una tabella con il giro che ha fatto tale visitatore -->
+    <table id="visitor">
+        <thead>
+            <tr>
+                <th>id_room</th>
+                <th>time</th>
+                <th>room_name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${posizioni.empty}">
+                <td colspan="2"> No Books Available </td>
+            </tr>
+            <tr th:each="posizione : ${posizioni}">
+                <td><span th:text="${posizione.id}"></span></td>
+                <td><span th:text="${posizione.getTempoTotale()}"></span></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

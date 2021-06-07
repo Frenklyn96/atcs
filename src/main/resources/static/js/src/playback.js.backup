@@ -2,6 +2,12 @@ rangeBar = document.getElementById("myRange");
 document.getElementById("replay").addEventListener("click", replay);
 selectTag = document.getElementById("visitorSelect");
 
+/* Aggiungere nuovi elementi allla lista delle opzioni
+d3.select("#visitorSelect")
+    .append("option")
+    .attr("value", "prova")
+    .text("prova") */
+
 var data;
 var cx = 1000/2;
 var cy = 600/2;
@@ -248,19 +254,21 @@ function moveVisitor(data, count) {
         });
 }
 
-document.getElementById("replay").click();    // simula il primo click al caricamento della pagina così che la simulazione parta da sola
-
 // import dei dati dal file json
 function animate() {
     console.log(selectTag)
     // Qui bisogna restituire la lista di oggetti delle posizioni
-    data = QUI BISOGNA INSERIRE LA FUNZIONE CHE RESTITUISCE LA LISTA DA SPRING SULLA BASE DELL ID DEL VISITATORE;
-    console.log(data);
+    d3.json("data/"+selectTag.value+".json").then(function(d) {
+        data = d;
+        console.log(data);
 
-    doLegend(data);
-    mapColors(data);
+        doLegend(data);
+        mapColors(data);
 
-    moveVisitor(data, data.length); 
+        moveVisitor(data, data.length); 
+    }).catch(function(error){
+        console.log(error)                  // log in caso di errore
+    });
 }
 
 function replay() {

@@ -23,44 +23,23 @@
     <div class="main">
         <div class="svg-container">
             <h1>Play back</h1>
-            <p>Ciao a tutti! ${value}</p>
-            <button id="replay">Start Replay</button>
-            <br><br>
-            <span>Replay speed:</span>
-            <input type="range" min="25" max="200" step=25 value="100" class="slider" id="myRange" onchange="listen()">
-            <span id="speed">1x</span>
-            <br><br>
-            <span>Select Visitor ID: </span>
+            <p>Please, select the visitor ID and then click on "Start simulation" to show a playback of the visit.</p>
 
-            <!-- qui bisogna prelevare l'elenco degli id dei visitatori e metterlo nel menu a tendina -->
-            <select name="visitor" id="visitorSelect">
-                <option th:each="visitatore : ${visitatori}" th:value="${visitatore.id}" th:text="${visitatore.id}">
-                </option>
-            </select>
+            <form action="GUARDA SE PUOI INSERIRE IL CONTROLLER PER CAMBIARE PAGINA QUI. SE NON PUOI RIMUOVI IL TAG FORM E IL COMMENTO AL BUTTON QUI SOTTO E COMMENTA QUELLO SUBITO DOPO">
+                <!-- <button id="start" onclick="location.href='AGGIUNGERE QUI (TRA APICI SINGOLI) IL LINK ALLA PAGINE DELLA SIMULAZIONE';"> Start simulation</button> -------- MODIFICATO -->
+                <input type="submit" value="Submit">
+
+                <br><br>
+                <span>Select Visitor ID: </span>
+                <!-- qui bisogna prelevare l'elenco degli id dei visitatori e metterlo nel menu a tendina -->
+                <select name="visitor" id="visitorSelect" required>
+                    <option th:each="visitatore : ${visitatori}" th:value="${visitatore.id}" th:text="${visitatore.id}">
+                    </option>
+                </select>
+            </form>
 
         </div>
     </div>
-    <script th:src="@{/js/src/playback.js}"></script>
-
-    <!-- una volta seleionato l'id del visitatore bisogna stampare una tabella con il giro che ha fatto tale visitatore -->
-    <table id="visitor">
-        <thead>
-            <tr>
-                <th>id_room</th>
-                <th>time</th>
-                <th>room_name</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:if="${posizioni.empty}">
-                <td colspan="2"> No Books Available </td>
-            </tr>
-            <tr th:each="posizione : ${posizioni}">
-                <td><span th:text="${posizione.id}"></span></td>
-                <td><span th:text="${posizione.getTempoTotale()}"></span></td>
-            </tr>
-        </tbody>
-    </table>
 </body>
 
 </html>
