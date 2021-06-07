@@ -1,0 +1,121 @@
+<!doctype html>
+<meta charset="utf-8">
+<html lang="it">
+
+<head>
+    <title>ATCS - Assignment</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="topnav">
+        <a class="active" href="">Home</a>
+        <a href="">Play Back</a>
+        <a href="">Museum Statistics</a>
+        <a href="">Assignment</a>
+    </div>
+
+
+    <div class="main">
+        <div class="svg-container">
+            <h1>Assignment</h1>
+            <h2>General description</h2>
+            <p>
+                The assignment is planned for teams of two. It will replicate a study that was published at PUC
+                (reference below + appears at the data directory) – so you may follow the ideas there – or better – be
+                more creative.
+                <br>
+                You will get visit logs and will be asked to do two things:
+            <ul>
+                <li>analyze the logs and present information to the museum curator</li>
+                <li>create a “play back” system that will allow re-constructing of a museum visit using the time-tagged
+                    data in the log.</li>
+            </ul>
+            Consider following the Model-View-Controller (MVC) design/architectural pattern. Language/development
+            environment – whatever you like.
+            </p>
+
+            <h2>Details</h2>
+            <p>
+                You are requested to develop a Web-based system that, given a museum floor plan and a set of visit logs
+                of groups of different sizes, will enable its user to:
+            <ol>
+                <li>“play back” a visit of a selected group (or individual) – see how they moved around in the museum
+                    between exhibits, when it is possible to speed up the visit.</li>
+                <li>Create a visit summary for a selected group/individual
+                    <ul>
+                        <li>Where they visited</li>
+                        <li>How much time they spent</li>
+                        <li>What presentations they watched</li>
+                        <li>Did they enjoy</li>
+                        <li>Stayed more than the average group</li>
+                        <li>Watched presentations more than average</li>
+                        <li>Rated presentation higher than the average</li>
+                        <li>Did not interrupt the presentations</li>
+                    </ul>
+                </li>
+                <li>Present (visualize) statistics about the museum visit:
+                    <ul>
+                        <li>Analysis of how many visitors per hour in general</li>
+                        <li>How many visitors per room per hour?</li>
+                        <li>Attraction power (how many/proportion of visitors to the site visited a specific POI?) and
+                            holding power (how much time/relative time did visitors spend at a POI once they got there)
+                            of exhibits.</li>
+                    </ul>
+                </li>
+            </ol>
+            For the project you need to:
+            <ul>
+                <li>Create a database of individuals, their time-stamped events, the groups they belong to.</li>
+                <li>Enable to “replay a visit”</li>
+                <li>Create a visit summary for a group or an individual</li>
+                <li>Enable the presentation of visitors’ behavior statistics (as noted above and any creative idea you
+                    may have).</li>
+                <li>Write a summary report.</li>
+            </ul>
+            </p>
+
+            <h2>Material</h2>
+            <p>
+                For that you get:
+            <ul>
+                <li>A museum floor plan with names of POIs (enlarge to see) + an excel file with some corrections.</li>
+                <li>Visit logs – timestamped positions visited, timestamped presentations viewed with an indication if
+                    they ended normally
+                    (by the system) or terminated by the user and a list of time stamped events (less relevant).</li>
+                <li>An excel file that associates the visitor number (“A” column, log file number) with the visitor’s
+                    group (“B” column)
+                    other columns are not relevant.</li>
+            </ul>
+            </p>
+
+            <h2> Delivery</h2>
+            <p>
+                I need a link to get a project report + a web-based system (for playback) + a user guide (better to have
+                online help).
+                <br>
+                Deliverables:
+            <ol>
+                <li>Project report
+                    <ul>
+                        <li>What you did</li>
+                        <li>What technologies you used</li>
+                        <li>What did you learn</li>
+                        <li>Comments, suggestions, reflection</li>
+                    </ul>
+                </li>
+                <li>Link to a working web-based system that enables its user to:
+                    <ul>
+                        <li>Re-play (playback) visit for selected individuals/groups</li>
+                        <li>Analyze visitors’ behavior</li>
+                        <li>Various statistics as described above</li>
+                    </ul>
+                </li>
+            </ol>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
