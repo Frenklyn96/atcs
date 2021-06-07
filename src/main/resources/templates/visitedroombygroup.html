@@ -1,47 +1,58 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>ATCS</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="
+    @{/css/style.css}">
 </head>
+
 <body>
 
+    <div class="topnav">
+        <a class="active" href="">Home</a>
+        <a href="">News</a>
+        <a href="">Contatti</a>
+        <a href="">Info</a>
+    </div>
 
-<table>
-    <thead>
-    <tr>
-        <th>Id Stanza</th>
-        <th> Posizioni </th>
-        <th>Ora Inizio</th>
-        <th>Ora Fine</th>
-        <th>Tempo</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${posizioni.empty}">
-        <td colspan="2"> No Books Available </td>
-    </tr>
-    <tr th:each="posizione : ${posizioni}">
-        <td><span th:text="${posizione.stanza.id}"> Title </span></td>
-        <td><span th:text="${posizione.stanza.nome}"> Title </span></td>
-        <td><span th:text="${posizione.getOraInizioString()}"> Title</span> </span></td>
-        <td><span th:text="${posizione.getOraFineString()}"> Title </span></td>
-        <td><span th:text="${posizione.getTempoTotale()}">Title</span></td>
-    </tr>
-    </tbody>
-    <tbody>
-    <tr th:if="${presentazioni.empty}">
-        <td colspan="2"> No Books Available </td>
-    </tr>
-    <tr th:each="presentazione : ${presentazioni}">
-        <td><span th:text="${presentazione.presentazione}"> Title </span></td>
-        <td><span th:text="${presentazione.getOraInizioString()}"> Title </span></td>
-        <td><span th:text="${presentazione.getOraFineString()}"> Title</span> </span></td>
-        <td><span th:text="${presentazione.getTempoTotale()}"> Title</span> </span></td>
-    </tr>
-    </tbody>
-</table>
+    <table id="visitor">
+        <thead>
+            <tr>
+                <th>Id Stanza</th>
+                <th> Posizioni </th>
+                <th>Ora Inizio</th>
+                <th>Ora Fine</th>
+                <th>Tempo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${posizioni.empty}">
+                <td colspan="2"> No Books Available </td>
+            </tr>
+            <tr th:each="posizione : ${posizioni}">
+                <td><span th:text="${posizione.stanza.id}"> Title </span></td>
+                <td><span th:text="${posizione.stanza.nome}"> Title </span></td>
+                <td><span th:text="${posizione.getOraInizioString()}"> Title</span> </span></td>
+                <td><span th:text="${posizione.getOraFineString()}"> Title </span></td>
+                <td><span th:text="${posizione.getTempoTotale()}">Title</span></td>
+            </tr>
+        </tbody>
+        <tbody>
+            <tr th:if="${presentazioni.empty}">
+                <td colspan="2"> No Books Available </td>
+            </tr>
+            <tr th:each="presentazione : ${presentazioni}">
+                <td><span th:text="${presentazione.presentazione}"> Title </span></td>
+                <td><span th:text="${presentazione.getOraInizioString()}"> Title </span></td>
+                <td><span th:text="${presentazione.getOraFineString()}"> Title</span> </span></td>
+                <td><span th:text="${presentazione.getTempoTotale()}"> Title</span> </span></td>
+            </tr>
+        </tbody>
+    </table>
 
 
 </body>
+
 </html>

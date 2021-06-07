@@ -256,6 +256,8 @@ function moveVisitor(data, count) {
 
 // import dei dati dal file json
 function animate() {
+    console.log(selectTag)
+    // Qui bisogna restituire la lista di oggetti delle posizioni
     d3.json("data/"+selectTag.value+".json").then(function(d) {
         console.log(d);
         data = d;

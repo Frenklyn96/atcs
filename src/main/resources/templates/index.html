@@ -2,7 +2,7 @@
 <meta charset="utf-8">
 <html lang="it">
     <head>
-        <title>ATCS</title>
+        <title>ATCS - Home Page</title>
         <script th:src="@{/js/lib/d3.js}"></script>
         <script th:src="@{/js/lib/jquery-3.6.0.min.js}"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -11,31 +11,28 @@
         
         <div class="topnav">
             <a class="active" href="">Home</a>
-            <a href="">News</a>
-            <a href="">Contatti</a>
-            <a href="">Info</a>
+            <a href="">Play Back</a>
+            <a href="">Museum Statistics</a>
+            <a href="">Task</a>
         </div>
         
         
         <div class="main">
             <div class="svg-container">
-                <h1>Replay</h1>
-                <p>Ciao a tutti! ${value}</p>
-                <button id="replay">Start Replay</button>
-                <br><br>
-                <span>Replay speed:</span>
-                <input type="range" min="25" max="200" step=25 value="100" class="slider" id="myRange" onchange="listen()">
-                <span id="speed">1x</span>
-                <br><br>
-                <span>Select Visitor ID: </span>
-                <select name="visitor" id="visitorSelect">
-                    <option value="data1" selected="selected">data1</option>
-                    <option value="data2">data2</option>
-                    <option value="data3">data3</option>
-                </select>
+                <h1>Home Page</h1>
+                <p>
+                    In these pages you can see the carrying out of the <a href="">pratical assignment</a>.
+                    <br>
+                    In particular there is the following pages:
+                </p>
+                <dl>
+                    <dt>Play Back</dt> <dd>- the visual playback of a group (o individual) visit.</dd>
+                    <dt>Museum Statistics</dt> <dd>- statistics about the museum visit.</dd>
+                    <dt>Task</dt> <dd>- the full text of the assignment.</dd>
+                </dl>
+                
             </div>
         </div>
-        <script th:src="@{/js/src/playback.js}"></script>
     </body>
 </html>
 

@@ -1,33 +1,39 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <title>Getting Started: Serving Web Content</title>
+  <title>ATCS</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 </head>
+
 <body>
+  <div class="topnav">
+    <a class="active" href="">Home</a>
+    <a href="">Play Back</a>
+    <a href="">Museum Statistics</a>
+    <a href="">Task</a>
+  </div>
 
 
-<table>
-  <thead>
-  <tr>
-    <th>Id Stanza</th>
-    <th> Posizioni </th>
-    <th>Ora Inizio</th>
-    <th>Ora Fine</th>
-    <th>Tempo</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:if="${posizioni.empty}">
-    <td colspan="2"> No Books Available </td>
-  </tr>
-  <tr th:each="posizione : ${posizioni}">
-    <td><span th:text="${posizione.id}"> Title </span></td>
-    <td><span th:text="${posizione.getTempoTotale()}">Title</span></td>
-  </tr>
-  </tbody>
-
-
-
+  <table id="visitor">
+    <thead>
+      <tr>
+        <th>id_room</th>
+        <th>time</th>
+        <th>room_name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:if="${posizioni.empty}">
+        <td colspan="2"> No Books Available </td>
+      </tr>
+      <tr th:each="posizione : ${posizioni}">
+        <td><span th:text="${posizione.id}"></span></td>
+        <td><span th:text="${posizione.getTempoTotale()}"></span></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
+
 </html>
