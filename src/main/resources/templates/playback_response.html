@@ -45,12 +45,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:if="${posizioni.empty}">
-                <td colspan="2"> No Books Available </td>
-            </tr>
-            <tr th:each="posizione : ${posizioni}">
-                <td><span th:text="${posizione.id}"></span></td>
-                <td><span th:text="${posizione.getTempoTotale()}"></span></td>
+
             </tr>
         </tbody>
     </table>

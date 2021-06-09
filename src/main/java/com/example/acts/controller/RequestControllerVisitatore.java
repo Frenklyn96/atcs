@@ -65,10 +65,10 @@ public class RequestControllerVisitatore {
 
     //todo restituisci json con presentazione e posizione in ordine di data e tempo con relativo tempo in secondi ciascuno
     //per ogni visitatore
-    @RequestMapping(value="/playback_response")
+    @RequestMapping(value="/playback_response",method=RequestMethod.GET)
     public String animazione(@RequestParam("visitor") Long idVisitatore, Model model)
     {
-        List<RisultatoQuery> a = posizioneServices.getByVisitatoreOra(visitatoreServices.getVisitatoreById(idVisitatore).get());
+        /*List<RisultatoQuery> a = posizioneServices.getByVisitatoreOra(visitatoreServices.getVisitatoreById(idVisitatore).get());
         List<RisultatoQuery> b= presentazioneServices.getByVisitatoreOra(visitatoreServices.getVisitatoreById(idVisitatore).get());
         a.addAll(b);
         Collections.sort(a, new Comparator<RisultatoQuery>() {
@@ -77,9 +77,14 @@ public class RequestControllerVisitatore {
                 return o1.getOraInizio().compareTo(o2.getOraInizio());
             }
         });
-        System.out.println(a.get(0).getStanza().getId());
-        model.addAttribute("posizioni",a);
-        return "playback_response";
+        List<Mappa> posizioni =new ArrayList<Mappa>();
+        for(RisultatoQuery x:a){
+            if(x.getStanza()!=null)
+             posizioni.add(new Mappa(x.getStanza().getId(),x.getTempoTotale()));
+            else
+                posizioni.add(new Mappa(presentazioneServices.findByName(x.getPresentazione()).get(0).getId(),x.getTempoTotale()));
+        }*/
+        return ("playback_response");
     }
 
 

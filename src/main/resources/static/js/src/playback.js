@@ -251,10 +251,24 @@ function moveVisitor(data, count) {
 document.getElementById("replay").click();    // simula il primo click al caricamento della pagina così che la simulazione parta da sola
 
 // import dei dati dal file json
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+            tmp = item.split("=");
+            if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
+}
 function animate() {
     console.log(selectTag)
+    data=$.getJSON('http://localhost:8080/playback_responselist?visitor='+findGetParameter('visitor'), function(posizioni){
+        console.log(posizioni);
+            });
     // Qui bisogna restituire la lista di oggetti delle posizioni
-    console.log(JSON.stringify(each'$(posizioni.get(0).getStanza().getId())'));
 
     console.log(data);
 
