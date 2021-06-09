@@ -106,7 +106,7 @@ poi.exit().remove();    // exit
 function mapColors(data) {
     let strValue = [];
     data.forEach(function(d) {
-        strValue.push("#poi"+d.id); // particolare tipo di hashing 
+        strValue.push("#poi"+d.idStanza); // particolare tipo di hashing 
     })
     oScale.domain(strValue);
 }
@@ -125,18 +125,20 @@ function doLegend(data) {
     let g2 = g.append("g");
     let i = 0;
     data.forEach(function (d){
+        console.log(d.idStanza)
+        console.log(POIsObject[d.idStanza].name)
         i++;
         g1.append("text")
             .attr("class", "legend")
-            .attr("id", "poi"+d.id)
+            .attr("id", "poi"+d.idStanza)
             .attr("x", legendX+15)
             .attr("y", legendY+(20*i))
-            .text(POIsObject[d.id].name)
+            .text(POIsObject[d.idStanza].name)
             .on("mouseover", handleMouseOver)
             .on("mouseout", handleMouseOut);
 
         g2.append("circle")
-            .attr("id", "poi"+d.id)
+            .attr("id", "poi"+d.idStanza)
             .attr("class", "legend")
             .attr("cx", legendX)
             .attr("cy", (legendY+(20*i)-5))
@@ -219,20 +221,20 @@ var visitorLabel = svg.append("g")
 function moveVisitor(data, count) {
     
     svg.select("#label")
-        .text(POIsObject[data[0].id].name);
+        .text(POIsObject[data[0].idStanza].name);
 
-    svg.selectAll("circle#poi"+data[0].id)
+    svg.selectAll("circle#poi"+data[0].idStanza)
         .attr("opacity", 1)
         .transition()
         .attr("r", radius)
-        .attr("fill",oScale("#poi"+data[0].id));
+        .attr("fill",oScale("#poi"+data[0].idStanza));
 
     svg.select("circle.visitor")
         .transition()
         .duration(1500/speed) // <--- reduce the duration when count is high
-        .delay((data[0].time*10)/speed)
-        .attr("cx", POIsObject[data[0].id].x)
-        .attr("cy", POIsObject[data[0].id].y)
+        .delay((data[0].tempoTotale)/speed)
+        .attr("cx", POIsObject[data[0].idStanza].x)
+        .attr("cy", POIsObject[data[0].idStanza].y)
         .on("end", () => {
             // when all objects stopped animating and more animate() calls needed:
             if (--count > 0) {
@@ -265,17 +267,16 @@ function findGetParameter(parameterName) {
 }
 function animate() {
     console.log(selectTag)
-    data=$.getJSON('http://localhost:8080/playback_responselist?visitor='+findGetParameter('visitor'), function(posizioni){
-        console.log(posizioni);
-            });
-    // Qui bisogna restituire la lista di oggetti delle posizioni
+    data=$.getJSON('http://localhost:8080/playback_responselist?visitor='+findGetParameter('visitor'))
+        .then(function(d) {
+            data = d;
+            console.log(data);
 
-    console.log(data);
+            doLegend(data);
+            mapColors(data);
 
-    doLegend(data);
-    mapColors(data);
-
-    moveVisitor(data, data.length); 
+            moveVisitor(data, data.length); 
+        });
 }
 
 function replay() {

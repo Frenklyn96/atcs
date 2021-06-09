@@ -42,7 +42,7 @@ public class RequestControllerVisitatoreRest {
             if(x.getStanza()!=null)
                 posizioni.add(new Mappa(x.getStanza().getId(),x.getTempoTotale()));
             else
-                posizioni.add(new Mappa(presentazioneServices.findByName(x.getPresentazione()).get(0).getId(),x.getTempoTotale()));
+                posizioni.add(new Mappa(presentazioneServices.findByName(x.getPresentazione()).get(0).getIdPresentazione(),x.getTempoTotale()));
         }
         return posizioni;
     }
