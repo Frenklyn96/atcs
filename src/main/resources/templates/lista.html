@@ -5,30 +5,14 @@
     <title>Title</title>
 
 
-  <div class="main">
-    <div class="svg-container">
-      <h1>Play back</h1>
-      <p>Ciao a tutti! ${value}</p>
-      <button id="replay">Start Replay</button>
-      <br><br>
-      <span>Replay speed:</span>
-      <input type="range" min="25" max="200" step=25 value="100" class="slider" id="myRange" onchange="listen()">
-      <span id="speed">1x</span>
-      <br><br>
-      <span>Select Visitor ID: </span>
-
-      <!-- qui bisogna prelevare l'elenco degli id dei visitatori e metterlo nel menu a tendina -->
-      <form action="/playback">
-      <select name="visitor" id="visitorSelect">
-        <option th:each="visitatore : ${visitatori}" th:value="${visitatore.id}" th:text="${visitatore.id}" default=" ">
-        </option>
-      </select>
-        <input type="submit" value="Submit">
-      </form>
-    </div>
-  </div>
 </head>
 <body>
-
+<form action="index" method="get">
+  <label for="fname">First name:</label>
+  <input type="text" id="fname" name="fname"><br><br>
+  <label for="lname">Last name:</label>
+  <input type="text" id="lname" name="lname"><br><br>
+  <input type="submit" value="Submit">
+</form>
 </body>
 </html>

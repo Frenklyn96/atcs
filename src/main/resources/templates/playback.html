@@ -25,14 +25,14 @@
             <h1>Play back</h1>
             <p>Please, select the visitor ID and then click on "Start simulation" to show a playback of the visit.</p>
 
-            <form action="GUARDA SE PUOI INSERIRE IL CONTROLLER PER CAMBIARE PAGINA QUI. SE NON PUOI RIMUOVI IL TAG FORM E IL COMMENTO AL BUTTON QUI SOTTO E COMMENTA QUELLO SUBITO DOPO">
+            <form action="playback_response">
                 <!-- <button id="start" onclick="location.href='AGGIUNGERE QUI (TRA APICI SINGOLI) IL LINK ALLA PAGINE DELLA SIMULAZIONE';"> Start simulation</button> -------- MODIFICATO -->
                 <input type="submit" value="Submit">
 
                 <br><br>
                 <span>Select Visitor ID: </span>
                 <!-- qui bisogna prelevare l'elenco degli id dei visitatori e metterlo nel menu a tendina -->
-                <select name="visitor" id="visitorSelect" required>
+                <select name="visitor" id="visitor" required>
                     <option th:each="visitatore : ${visitatori}" th:value="${visitatore.id}" th:text="${visitatore.id}">
                     </option>
                 </select>

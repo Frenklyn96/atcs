@@ -24,7 +24,7 @@ public class RequestMuseumController {
     private VisitatoreServices visitatoreServices;
 
     //Ritorno Summuary Museo
-    @GetMapping("/museumData")
+    @GetMapping("/visitedroombygroup")
     public String statisticheMuseo (Model model){
         List<RisultatoQuery> a = posizioneServices.getAll();
         List<RisultatoQuery> b= presentazioneServices.geALL();
@@ -36,14 +36,15 @@ public class RequestMuseumController {
             conta.put(Integer.valueOf(x.getOraInizio().getHours()),conta.get(Integer.valueOf(x.getOraInizio().getHours()))+1);
         }
         Map <String,Integer> contaVisitatoriPerOra= new HashMap<String,Integer>();
-        for(RisultatoQuery x: a){
-            if (contaVisitatoriPerOra.get(String.valueOf (Integer.valueOf(x.getOraInizio().getHours())+" "+x.getStanza().getId().intValue()))==null)
-                contaVisitatoriPerOra.put(String.valueOf (Integer.valueOf(x.getOraInizio().getHours())+" "+x.getStanza().getId().intValue()),0);
-            contaVisitatoriPerOra.put(String.valueOf (Integer.valueOf(x.getOraInizio().getHours())+" "+x.getStanza().getId().intValue()),contaVisitatoriPerOra.get(String.valueOf (Integer.valueOf(x.getOraInizio().getHours())+" "+x.getStanza().getId().intValue())+1));
+        for(RisultatoQuery x: a) {
+            if (x.getStanza() != null) {
+                if (contaVisitatoriPerOra.get(String.valueOf(Integer.valueOf(x.getOraInizio().getHours()) + " " + x.getStanza().getId().intValue())) == null)
+                    contaVisitatoriPerOra.put(String.valueOf(Integer.valueOf(x.getOraInizio().getHours()) + " " + x.getStanza().getId().intValue()), 0);
+                contaVisitatoriPerOra.put(String.valueOf(Integer.valueOf(x.getOraInizio().getHours()) + " " + x.getStanza().getId().intValue()), contaVisitatoriPerOra.get(String.valueOf(Integer.valueOf(x.getOraInizio().getHours()) + " " + x.getStanza().getId().intValue()) + 1));
+            }
+            model.addAttribute("conta", conta);
+            model.addAttribute("contaVisitatoriPerOra", contaVisitatoriPerOra);
         }
-        model.addAttribute("conta",conta);
-        model.addAttribute("contaVisitatoriPerOra",contaVisitatoriPerOra);
-
-        return("museumData");
+        return("visitedroombygroup");
     }
 }

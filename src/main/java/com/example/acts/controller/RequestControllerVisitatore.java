@@ -25,10 +25,10 @@ public class RequestControllerVisitatore {
     private VisitatoreServices visitatoreServices;
 
     //Restituisce tutti i visitatori nel db
-    @RequestMapping(value = "/lista" )
+    @RequestMapping(value = "/playback" )
     public String tuttiVisitatoriId(Model model){
         model.addAttribute("visitatori",visitatoreServices.getAllVisitatori());
-        return("lista");
+        return("playback");
     }
 
     //Ritorno Summuary visitatori
@@ -65,8 +65,8 @@ public class RequestControllerVisitatore {
 
     //todo restituisci json con presentazione e posizione in ordine di data e tempo con relativo tempo in secondi ciascuno
     //per ogni visitatore
-    @RequestMapping("/playback/{id}")
-    public String animazione(@PathVariable("id") Long idVisitatore, Model model)
+    @RequestMapping(value="/playback_response")
+    public String animazione(@RequestParam("visitor") Long idVisitatore, Model model)
     {
         List<RisultatoQuery> a = posizioneServices.getByVisitatoreOra(visitatoreServices.getVisitatoreById(idVisitatore).get());
         List<RisultatoQuery> b= presentazioneServices.getByVisitatoreOra(visitatoreServices.getVisitatoreById(idVisitatore).get());
@@ -77,8 +77,9 @@ public class RequestControllerVisitatore {
                 return o1.getOraInizio().compareTo(o2.getOraInizio());
             }
         });
+        System.out.println(a.get(0).getStanza().getId());
         model.addAttribute("posizioni",a);
-        return "/playback";
+        return "playback_response";
     }
 
 

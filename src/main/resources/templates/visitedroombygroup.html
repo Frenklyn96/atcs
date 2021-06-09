@@ -28,26 +28,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:if="${posizioni.empty}">
+            <tr th:if="${conta.empty}">
                 <td colspan="2"> No Books Available </td>
             </tr>
-            <tr th:each="posizione : ${posizioni}">
-                <td><span th:text="${posizione.stanza.id}"> Title </span></td>
-                <td><span th:text="${posizione.stanza.nome}"> Title </span></td>
-                <td><span th:text="${posizione.getOraInizioString()}"> Title</span> </span></td>
-                <td><span th:text="${posizione.getOraFineString()}"> Title </span></td>
-                <td><span th:text="${posizione.getTempoTotale()}">Title</span></td>
+            <tr th:each="x : ${conta}">
+                <td><span th:text="${x.getKey()}"> Title </span></td>
+                <td><span th:text="${x.getValue()}"> Title </span></td>
+
             </tr>
         </tbody>
         <tbody>
-            <tr th:if="${presentazioni.empty}">
+            <tr th:if="${contaVisitatoriPerOra.empty}">
                 <td colspan="2"> No Books Available </td>
             </tr>
-            <tr th:each="presentazione : ${presentazioni}">
-                <td><span th:text="${presentazione.presentazione}"> Title </span></td>
-                <td><span th:text="${presentazione.getOraInizioString()}"> Title </span></td>
-                <td><span th:text="${presentazione.getOraFineString()}"> Title</span> </span></td>
-                <td><span th:text="${presentazione.getTempoTotale()}"> Title</span> </span></td>
+            <tr th:each="y : ${contaVisitatoriPerOra}">
+                <td><span th:text="${y.getKey()}"> Title </span></td>
+                <td><span th:text="${y.getValue()}"> Title </span></td>
+
             </tr>
         </tbody>
     </table>

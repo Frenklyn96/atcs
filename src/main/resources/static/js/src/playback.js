@@ -254,7 +254,8 @@ document.getElementById("replay").click();    // simula il primo click al carica
 function animate() {
     console.log(selectTag)
     // Qui bisogna restituire la lista di oggetti delle posizioni
-    data = QUI BISOGNA INSERIRE LA FUNZIONE CHE RESTITUISCE LA LISTA DA SPRING SULLA BASE DELL ID DEL VISITATORE;
+    console.log(JSON.stringify(each'$(posizioni.get(0).getStanza().getId())'));
+
     console.log(data);
 
     doLegend(data);
