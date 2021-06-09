@@ -50,7 +50,7 @@ public class RequestControllerVisitatoreRest {
         Mappa temp;
         for (Mappa x:posizioni)
         {
-            if(id_temp==x.getId()) {
+            if((id_temp==x.getId())&&(risp.size()!=0)) {
                 temp = risp.get(risp.size() - 1);
                 risp.remove(temp);
                 temp.setTime(temp.getTime()+x.getTime());
