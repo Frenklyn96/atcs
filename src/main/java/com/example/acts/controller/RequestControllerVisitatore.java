@@ -31,9 +31,14 @@ public class RequestControllerVisitatore {
         return("playback");
     }
 
+    @RequestMapping(value="/visitorsummuary")
+    public String indice (Model model){
+        model.addAttribute("visitatori",visitatoreServices.getAllVisitatori());
+        return ("visitorsummuary");
+    }
     //Ritorno Summuary visitatori
-    @RequestMapping(value = "/visitorSummuary/{id}")
-    public String prova(@PathVariable("id")Long idVisitatore, Model model)
+    @RequestMapping(value = "/visitorsummuary_response")
+    public String prova(@RequestParam("visitor")Long idVisitatore, Model model)
     {   Double avgTempo,avgVoto;
         List<Presentazione> temp;
         List<String>enjoy=new ArrayList<>();
@@ -58,9 +63,9 @@ public class RequestControllerVisitatore {
             risp=risp+"N";
         enjoy.add(risp);
         }
-        model.addAttribute("presentazione",presentazioneServices);
+        model.addAttribute("presentazioni",p);
         model.addAttribute("enjoy",enjoy);
-        return "visitedroombygroup";
+        return "visitorsummuary_response";
     }
 
     //todo restituisci json con presentazione e posizione in ordine di data e tempo con relativo tempo in secondi ciascuno

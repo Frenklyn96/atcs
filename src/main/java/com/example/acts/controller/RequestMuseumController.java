@@ -38,9 +38,10 @@ public class RequestMuseumController {
         Map <String,Integer> contaVisitatoriPerOra= new HashMap<String,Integer>();
         for(RisultatoQuery x: a) {
             if (x.getStanza() != null) {
-                if (contaVisitatoriPerOra.get(String.valueOf(Integer.valueOf(x.getOraInizio().getHours()) + " " + x.getStanza().getId().intValue())) == null)
-                    contaVisitatoriPerOra.put(String.valueOf(Integer.valueOf(x.getOraInizio().getHours()) + " " + x.getStanza().getId().intValue()), 0);
-                contaVisitatoriPerOra.put(String.valueOf(Integer.valueOf(x.getOraInizio().getHours()) + " " + x.getStanza().getId().intValue()), contaVisitatoriPerOra.get(String.valueOf(Integer.valueOf(x.getOraInizio().getHours()) + " " + x.getStanza().getId().intValue()) + 1));
+                String key= Integer.valueOf(x.getOraInizio().getHours()) + " " + x.getStanza().getId().intValue();
+                if (contaVisitatoriPerOra.get(key) == null)
+                 contaVisitatoriPerOra.put((key), 0);
+                contaVisitatoriPerOra.put(key, contaVisitatoriPerOra.get(key) + 1);
             }
             model.addAttribute("conta", conta);
             model.addAttribute("contaVisitatoriPerOra", contaVisitatoriPerOra);

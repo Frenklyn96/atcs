@@ -1,0 +1,45 @@
+<!doctype html>
+<meta charset="utf-8">
+<html lang="it">
+
+<head>
+  <title>ATCS - Play Back</title>
+  <script th:src="@{/js/lib/d3.js}"></script>
+  <script th:src="@{/js/lib/jquery-3.6.0.min.js}"></script>
+  <link rel="stylesheet" type="text/css" th:href="
+        @{/css/style.css}">
+</head>
+
+<body>
+
+<div class="topnav">
+  <a class="active" href="">Home</a>
+  <a href="">Play Back</a>
+  <a href="">Museum Statistics</a>
+  <a href="">Assignment</a>
+</div>
+
+
+<div class="main">
+  <div class="svg-container">
+    <h1>Play back</h1>
+    <p>Please, select the visitor ID and then click on "Start simulation" to show a playback of the visit.</p>
+
+    <form action="visitorsummuary_response">
+      <!-- <button id="start" onclick="location.href='AGGIUNGERE QUI (TRA APICI SINGOLI) IL LINK ALLA PAGINE DELLA SIMULAZIONE';"> Start simulation</button> -------- MODIFICATO -->
+      <input type="submit" value="Submit">
+
+      <br><br>
+      <span>Select Visitor ID: </span>
+      <!-- qui bisogna prelevare l'elenco degli id dei visitatori e metterlo nel menu a tendina -->
+      <select name="visitor" id="visitor" required>
+        <option th:each="visitatore : ${visitatori}" th:value="${visitatore.id}" th:text="${visitatore.id}">
+        </option>
+      </select>
+    </form>
+
+  </div>
+</div>
+</body>
+
+</html>

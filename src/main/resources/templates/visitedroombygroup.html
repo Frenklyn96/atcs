@@ -32,8 +32,8 @@
                 <td colspan="2"> No Books Available </td>
             </tr>
             <tr th:each="x : ${conta}">
-                <td><span th:text="${x.getKey()}"> Title </span></td>
-                <td><span th:text="${x.getValue()}"> Title </span></td>
+                <td><span th:text="${x.getKey()}"> Title </span></td>   <!--Ora-->
+                <td><span th:text="${x.getValue()}"> Title </span></td> <!--visitatori nel museo a quell'ora-->
 
             </tr>
         </tbody>
@@ -42,8 +42,8 @@
                 <td colspan="2"> No Books Available </td>
             </tr>
             <tr th:each="y : ${contaVisitatoriPerOra}">
-                <td><span th:text="${y.getKey()}"> Title </span></td>
-                <td><span th:text="${y.getValue()}"> Title </span></td>
+                <td><span th:text="${y.getKey()}"> Title </span></td> <!--ora idstanza numero-->
+                <td><span th:text="${y.getValue()}"> Title </span></td> <!--visitatori in quell'ora -->
 
             </tr>
         </tbody>

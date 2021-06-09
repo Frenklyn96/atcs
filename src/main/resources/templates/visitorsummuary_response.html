@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<body>
+
+<div class="topnav">
+  <a class="active" href="">Home</a>
+  <a href="">Play Back</a>
+  <a href="">Museum Statistics</a>
+  <a href="">Assignment</a>
+</div>
+
+
+<div class="main">
+  <div class="svg-container">
+    <h1>Play back</h1>
+    <p>Please, select the visitor ID and then click on "Start simulation" to show a playback of the visit.</p>
+
+    <!-- una volta seleionato l'id del visitatore bisogna stampare una tabella con il giro che ha fatto tale visitatore -->
+    <table id="visitor">
+      <thead>
+      <tr>
+        <th>id_room</th>
+        <th>time</th>
+        <th>room_name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:if="${posizioni.empty}">
+        <td colspan="2"> No Books Available </td>
+      </tr>
+      <tr th:each="posizione : ${posizioni}">
+        <td><span th:text="${posizione.stanza.nome}"></span></td>
+      </tr>
+      </tbody>
+      </tr>
+      </tbody>
+    </table>
+
+      Presentazioni
+      <table id="visitor">
+        <thead>
+        <tr>
+          <th>id_room</th>
+          <th>time</th>
+          <th>room_name</th>
+        </tr>
+        </thead>
+
+      <tbody>
+      <tr th:if="${presentazioni.empty}">
+        <td colspan="2"> No Books Available </td>
+      </tr>
+      <tr th:each="presentazione : ${presentazioni}">
+        <td><span th:text="${presentazione.presentazione}"></span></td>
+      </tr>
+      </tbody>
+      <tbody>
+      <tr th:if="${presentazioni.empty}">
+        <td colspan="2"> No Books Available </td>
+      </tr>
+      <tr th:each="e : ${enjoy}">
+        <td><span th:text="${e}"></span></td> <!-- Reazione del visitatore per ogni presentazione. In ordinde di presentazione della tabela sovrastante-->
+      </tr>
+      </tbody>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+</body>
+</head>
+<body>
+
+</body>
+</html>
