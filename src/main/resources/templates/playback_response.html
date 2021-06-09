@@ -30,7 +30,8 @@
             <input type="range" min="25" max="200" step=25 value="100" class="slider" id="myRange" onchange="listen()">
             <span id="speed">1x</span>
             <br><br>
-            <button id="replay">Play again</button>
+            <button id="replay" disabled>Play again</button>
+            <div class="loader"></div>
         </div>
     </div>
     <script th:src="@{/js/src/playback.js}"></script>

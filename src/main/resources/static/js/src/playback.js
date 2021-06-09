@@ -28,6 +28,10 @@ var legendY = 220;
 var oScale = d3.scaleOrdinal(d3.schemePaired);      // colori per i dati
 var radius = 7;
 var speed = 1;
+var svg;
+var g1;
+var poi;
+var visitorLabel;
 
 function listen() {
     rangeBar.addEventListener("change", changeSpeed(parseFloat(rangeBar.value)));
@@ -52,46 +56,68 @@ document.addEventListener('keydown', e =>
     e.code === "KeyA" ? count++ || animate() : 0
 );
 
-var svg = d3.select("div.svg-container")
-   .append("div")
-   // Container class to make it responsive.
-   .classed("svg-container", true) 
-   .append("svg")
-   // Responsive SVG needs these 2 attributes and no w"id"th and height attr.
-   .attr("preserveAspectRatio", "xMinYMin meet")
-   .attr("viewBox", "0 0 1000 600")  // dimensioni 800x800 + 200 di padding x + 100 di padding y
-   // Class to make it responsive.
-   .classed("svg-content-responsive", true)
-   .on("click", function() {console.log(d3.pointer(event,svg.node()));});   // funzione che mi permette di ottenere le coordinate relative del 
-   
-/* creazione della mappa */
-svg.append("image")
-    .attr("x", 50)
-    .attr("y", 0)
-    .attr("width", "80%")
-    .attr("height", "80%")
-    .attr("xlink:href", "/images/HechtMuseumNew_edited.png")
-    .transition().duration(1000)
-    .attr("opacity", 1);
+function showSVG() {
+    d3.select(".loader").remove();
 
-/* Creazione dei vari POI */    
-var g1 = svg.append("g") // gruppo di punti
-    .attr("id","gpois");
+    d3.select("#replay")
+        .attr('disabled', null);
 
-var poi = g1.selectAll(".pois")
-    .data(POIs);
+    svg = d3.select("div.svg-container")
+        .append("div")
+        // Container class to make it responsive.
+        .classed("svg-container", true) 
+        .append("svg")
+        // Responsive SVG needs these 2 attributes and no w"id"th and height attr.
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "0 0 1000 600")  // dimensioni 800x800 + 200 di padding x + 100 di padding y
+        // Class to make it responsive.
+        .classed("svg-content-responsive", true)
+        .on("click", function() {console.log(d3.pointer(event,svg.node()));});   // funzione che mi permette di ottenere le coordinate relative del 
+    
+    /* creazione della mappa */
+    svg.append("image")
+        .attr("x", 50)
+        .attr("y", 0)
+        .attr("width", "80%")
+        .attr("height", "80%")
+        .attr("xlink:href", "/images/HechtMuseumNew_edited.png")
+        .transition().duration(1000)
+        .attr("opacity", 1);
 
-poi.enter().append("circle")    // enter
-    .attr("id", d=>"poi"+d.id)
-    .attr("class", "pois")
-    .attr("cx", d=>d.x)
-    .attr("cy", d=>d.y)
-    .attr("r", 3)
-    .attr("stroke", "black")
-    .attr("stroke-width", 1)
-    .on("mouseover", handleMouseOver)
-    .on("mouseout", handleMouseOut)
-    .attr("opacity", 0);
+    /* Creazione dei vari POI */    
+    g1 = svg.append("g") // gruppo di punti
+        .attr("id","gpois");
+
+    poi = g1.selectAll(".pois")
+        .data(POIs);
+
+    poi.enter().append("circle")    // enter
+        .attr("id", d=>"poi"+d.id)
+        .attr("class", "pois")
+        .attr("cx", d=>d.x)
+        .attr("cy", d=>d.y)
+        .attr("r", 3)
+        .attr("stroke", "black")
+        .attr("stroke-width", 1)
+        .on("mouseover", handleMouseOver)
+        .on("mouseout", handleMouseOut)
+        .attr("opacity", 0);
+
+    poi.exit().remove();    // exit
+
+    textY = 485
+    /* label della posizione del visitatore */    
+    visitorLabel = svg.append("g")
+        .attr("id", "glabel")
+        .append("text")
+        .attr("class", "visitor")
+        .attr("id", "label")
+        .attr("x", cx)
+        .attr("y", textY)
+        .text("")
+        .style("text-anchor", "middle")
+}
+
 
 function updatePoi() {
     d3.selectAll(".pois")
@@ -100,13 +126,12 @@ function updatePoi() {
         .attr("opacity", 0);
 }
 
-poi.exit().remove();    // exit
 
 /* Create color scale */
 function mapColors(data) {
     let strValue = [];
     data.forEach(function(d) {
-        strValue.push("#poi"+d.idStanza); // particolare tipo di hashing 
+        strValue.push("#poi"+d.id); // particolare tipo di hashing 
     })
     oScale.domain(strValue);
 }
@@ -125,20 +150,18 @@ function doLegend(data) {
     let g2 = g.append("g");
     let i = 0;
     data.forEach(function (d){
-        console.log(d.idStanza)
-        console.log(POIsObject[d.idStanza].name)
         i++;
         g1.append("text")
             .attr("class", "legend")
-            .attr("id", "poi"+d.idStanza)
+            .attr("id", "poi"+d.id)
             .attr("x", legendX+15)
             .attr("y", legendY+(20*i))
-            .text(POIsObject[d.idStanza].name)
+            .text(POIsObject[d.id].name)
             .on("mouseover", handleMouseOver)
             .on("mouseout", handleMouseOut);
 
         g2.append("circle")
-            .attr("id", "poi"+d.idStanza)
+            .attr("id", "poi"+d.id)
             .attr("class", "legend")
             .attr("cx", legendX)
             .attr("cy", (legendY+(20*i)-5))
@@ -205,36 +228,24 @@ function removeVisitors() {
     svg.selectAll(".legend").remove();
 }
 
-textY = 485
-/* label della posizione del visitatore */    
-var visitorLabel = svg.append("g")
-    .attr("id", "glabel")
-    .append("text")
-    .attr("class", "visitor")
-    .attr("id", "label")
-    .attr("x", cx)
-    .attr("y", textY)
-    .text("")
-    .style("text-anchor", "middle")
-
 /* funzione che mostra il percorso del visitatore */    
 function moveVisitor(data, count) {
     
     svg.select("#label")
-        .text(POIsObject[data[0].idStanza].name);
+        .text(POIsObject[data[0].id].name);
 
-    svg.selectAll("circle#poi"+data[0].idStanza)
+    svg.selectAll("circle#poi"+data[0].id)
         .attr("opacity", 1)
         .transition()
         .attr("r", radius)
-        .attr("fill",oScale("#poi"+data[0].idStanza));
+        .attr("fill",oScale("#poi"+data[0].id));
 
     svg.select("circle.visitor")
         .transition()
         .duration(1500/speed) // <--- reduce the duration when count is high
-        .delay((data[0].tempoTotale)/speed)
-        .attr("cx", POIsObject[data[0].idStanza].x)
-        .attr("cy", POIsObject[data[0].idStanza].y)
+        // .delay((data[0].time)/speed)
+        .attr("cx", POIsObject[data[0].id].x)
+        .attr("cy", POIsObject[data[0].id].y)
         .on("end", () => {
             // when all objects stopped animating and more animate() calls needed:
             if (--count > 0) {
@@ -250,7 +261,6 @@ function moveVisitor(data, count) {
         });
 }
 
-document.getElementById("replay").click();    // simula il primo click al caricamento della pagina così che la simulazione parta da sola
 
 // import dei dati dal file json
 function findGetParameter(parameterName) {
@@ -265,18 +275,14 @@ function findGetParameter(parameterName) {
         });
     return result;
 }
+
 function animate() {
-    console.log(selectTag)
-    data=$.getJSON('http://localhost:8080/playback_responselist?visitor='+findGetParameter('visitor'))
-        .then(function(d) {
-            data = d;
-            console.log(data);
+    console.log(data);
 
-            doLegend(data);
-            mapColors(data);
+    doLegend(data);
+    mapColors(data);
 
-            moveVisitor(data, data.length); 
-        });
+    moveVisitor(data, data.length); 
 }
 
 function replay() {
@@ -284,6 +290,17 @@ function replay() {
     removeVisitors()
     newVisitor();
 }
+
+// Primo avvio
+data=$.getJSON('http://localhost:8080/playback_responselist?visitor='+findGetParameter('visitor'))
+    .then(function(d) {
+        data = d;
+        console.log(data);
+        showSVG();
+        replay();
+    });
+
+// document.getElementById("replay").click();    // simula il primo click al caricamento della pagina così che la simulazione parta da sola
 
 // aggiungere sistema (barra) per aumentare (o ridurre) la velocità di transizione delle animazioni
 // controllare perché non prende il nuovo file json 
