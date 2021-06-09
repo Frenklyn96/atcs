@@ -1,28 +1,28 @@
 package com.example.acts.entity;
 
 public class Mappa {
-    private Long idStanza;
-    private int TempoTotale;
+    private Long id;
+    private int time;
 
     public Mappa (){}
     public Mappa(Long idStanza, int tempoTotale) {
-        this.idStanza = idStanza;
-        TempoTotale = tempoTotale;
+        this.id = idStanza;
+        this.time = tempoTotale;
     }
 
-    public Long getIdStanza() {
-        return idStanza;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdStanza(Long idStanza) {
-        this.idStanza = idStanza;
+    public void setId(Long idStanza) {
+        this.id = idStanza;
     }
 
-    public int getTempoTotale() {
-        return TempoTotale;
+    public int getTime() {
+        return time;
     }
 
-    public void setTempoTotale(int tempoTotale) {
-        TempoTotale = tempoTotale;
+    public void setTime(int tempoTotale) {
+        time = tempoTotale;
     }
 }

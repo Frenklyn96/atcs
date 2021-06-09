@@ -3,6 +3,7 @@ package com.example.acts.controller;
 import com.example.acts.entity.Mappa;
 import com.example.acts.entity.RisultatoQuery;
 import com.example.acts.services.*;
+import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +45,21 @@ public class RequestControllerVisitatoreRest {
             else
                 posizioni.add(new Mappa(presentazioneServices.findByName(x.getPresentazione()).get(0).getIdPresentazione(),x.getTempoTotale()));
         }
-        return posizioni;
+        Long id_temp=posizioni.get(0).getId();
+        List<Mappa> risp= new ArrayList<Mappa>();
+        Mappa temp;
+        for (Mappa x:posizioni)
+        {
+            if(id_temp==x.getId()) {
+                temp = risp.get(risp.size() - 1);
+                risp.remove(temp);
+                temp.setTime(temp.getTime()+x.getTime());
+                risp.add(temp);
+            }
+            else
+                id_temp=x.getId();
+
+        }
+        return risp;
     }
 }
