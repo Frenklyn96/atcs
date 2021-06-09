@@ -57,6 +57,7 @@ public class RequestControllerVisitatoreRest {
                 risp.add(temp);
             }
             else
+                risp.add(x);
                 id_temp=x.getId();
 
         }
