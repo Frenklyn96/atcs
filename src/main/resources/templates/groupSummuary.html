@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>ATCS</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="
+    @{/css/style.css}">
+</head>
+
+<body>
+
+    <div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="playback">Playback</a>
+        <a href="visitedroombygroup">Museum Statistics</a>
+        <a href="assignment">Assignment</a>
+    </div>
+
+    <table id="visitor">
+        <thead>
+            <tr>
+                <th>Id Stanza</th>
+                <th> Posizioni </th>
+                <th>Ora Inizio</th>
+                <th>Ora Fine</th>
+                <th>Tempo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${conta.empty}">
+                <td colspan="2"> No Books Available </td>
+            </tr>
+            <tr th:each="x : ${conta}">
+                <td><span th:text="${x.getKey()}"> Title </span></td>   <!--Ora-->
+                <td><span th:text="${x.getValue()}"> Title </span></td> <!--visitatori nel museo a quell'ora-->
+
+            </tr>
+        </tbody>
+        <tbody>
+            <tr th:if="${contaVisitatoriPerOra.empty}">
+                <td colspan="2"> No Books Available </td>
+            </tr>
+            <tr th:each="y : ${contaVisitatoriPerOra}">
+                <td><span th:text="${y.getKey()}"> Title </span></td> <!--ora idstanza numero-->
+                <td><span th:text="${y.getValue()}"> Title </span></td> <!--visitatori in quell'ora -->
+
+            </tr>
+        </tbody>
+    </table>
+
+
+</body>
+
+</html>

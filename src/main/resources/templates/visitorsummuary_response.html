@@ -1,79 +1,122 @@
 <!DOCTYPE html>
+<meta charset="utf-8">
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
 <body>
 
-<div class="topnav">
-  <a class="active" href="">Home</a>
-  <a href="">Play Back</a>
-  <a href="">Museum Statistics</a>
-  <a href="">Assignment</a>
-</div>
+  <div class="topnav">
+    <a class="active" href="/">Home</a>
+    <a href="playback">Playback</a>
+    <a href="visitedroombygroup">Museum Statistics</a>
+    <a href="assignment">Assignment</a>
+  </div>
 
 
-<div class="main">
-  <div class="svg-container">
-    <h1>Play back</h1>
-    <p>Please, select the visitor ID and then click on "Start simulation" to show a playback of the visit.</p>
+  <div class="main">
+    <br>
+    <form action="playback">
+      <input type="submit" value="Go Back">
+    </form>
+    <br>
 
-    <!-- una volta seleionato l'id del visitatore bisogna stampare una tabella con il giro che ha fatto tale visitatore -->
-    <table id="visitor">
-      <thead>
-      <tr>
-        <th>id_room</th>
-        <th>time</th>
-        <th>room_name</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:if="${posizioni.empty}">
-        <td colspan="2"> No Books Available </td>
-      </tr>
-      <tr th:each="posizione : ${posizioni}">
-        <td><span th:text="${posizione.stanza.nome}"></span></td>
-      </tr>
-      </tbody>
-      </tr>
-      </tbody>
-    </table>
+    <div class="svg-container">
+      <h1>Play back</h1>
+      <p>Please, select the visitor ID and then click on "Start simulation" to show a playback of the visit.</p>
 
-      Presentazioni
+      <br>
+      <p>
+        <strong>Attention!</strong> The database that we chose to use is very slow, please be patient (approximately
+        35-40 seconds of loading).
+      </p>
+
+      <!-- una volta seleionato l'id del visitatore bisogna stampare una tabella con il giro che ha fatto tale visitatore -->
       <table id="visitor">
         <thead>
-        <tr>
-          <th>id_room</th>
-          <th>time</th>
-          <th>room_name</th>
+          <tr>
+            <th>id</th>
+            <th>time</th>
+            <th>room name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:if="${posizioni.empty}">
+            <td colspan="2"> No Books Available </td>
+          </tr>
+          <tr th:each="posizione : ${posizioni}">
+            <td><span th:text="${posizione.stanza.id}"></span></td>
+            <td><span text="${posizione.getTempoTotale()}"></span></td>
+            <td><span th:text="${posizione.stanza.nome}"></span></td>
+          </tr>
+        </tbody>
         </tr>
+        </tbody>
+      </table>
+
+      <br>
+      <h1>Presentations</h1>
+      <br>
+      <p>Here you can find the presentations that the current visitor saw.</p>
+      
+      <br>
+      <p>
+        <strong>Attention!</strong> The database that we chose to use is very slow, please be patient (approximately
+        35-40 seconds of loading).
+      </p>
+
+      <table id="visitor">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>presentation name</th>
+            <th>more than average group</th>
+            <th>Rated higher than average</th>
+            <th>interrupt the presentations</th>
+          </tr>
         </thead>
 
-      <tbody>
-      <tr th:if="${presentazioni.empty}">
-        <td colspan="2"> No Books Available </td>
-      </tr>
-      <tr th:each="presentazione : ${presentazioni}">
-        <td><span th:text="${presentazione.presentazione}"></span></td>
-      </tr>
-      </tbody>
-      <tbody>
-      <tr th:if="${presentazioni.empty}">
-        <td colspan="2"> No Books Available </td>
-      </tr>
-      <tr th:each="e : ${enjoy}">
-        <td><span th:text="${e}"></span></td> <!-- Reazione del visitatore per ogni presentazione. In ordinde di presentazione della tabela sovrastante-->
-      </tr>
-      </tbody>
-      </tr>
-      </tbody>
-    </table>
+        <tbody>
+          <tr th:if="${presentazioni.empty}">
+            <td colspan="2"> No Books Available </td>
+          </tr>
+          <tr th:each="presentazione : ${presentazioni}">
+            <td><span th:text="${presentazione.id}"></span></td>
+            <td><span th:text="${presentazione.presentazione}"></span></td>
 
+            <td><span th:text="${enjoy.get(presentazione.presentazione)[0]}"></span></td>
+            <td><span th:text="${enjoy.get(presentazione.presentazione)[1]}"></span></td>
+            <td><span th:text="${enjoy.get(presentazione.presentazione)[2]}"></span></td>
+          </tr>
+        </tbody>
+        <!--
+        <tbody>
+          <tr th:if="${presentazioni.empty}">
+            <td colspan="2"> No Books Available </td>
+          </tr>
+          <tr th:each="e : ${enjoy}">
+            <td><span th:text="${e}"></span></td>
+            <td><span th:text="${e[0]}"></span></td>
+            <td><span th:text="${e[1]}"></span></td>
+            <td><span th:text="${e[2]}"></span></td>
+             Reazione del visitatore per ogni presentazione. In ordinde di presentazione della tabela sovrastante
+          </tr>
+        </tbody>
+      -->
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
   </div>
-</div>
 </body>
 </head>
+
 <body>
 
 </body>
+
 </html>

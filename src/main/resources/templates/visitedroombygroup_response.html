@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>ATCS - Museum Statistics</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="
+    @{/css/style.css}">
+</head>
+
+<body>
+
+    <div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="playback">Playback</a>
+        <a href="visitedroombygroup">Museum Statistics</a>
+        <a href="assignment">Assignment</a>
+    </div>
+
+    <br>
+    <form action="visitedroombygroup">
+        <input type="submit" value="Go Back">
+    </form>
+
+    <br>
+    
+    <h1>Museum Statistics</h1>
+    <p>In this page you can see how many visitor per hour visit the room you choosen.</p>
+
+    <br>
+    <p>
+        <strong>Attention!</strong> The database that we chose to use is very slow, please be patient (approximately 35-40 seconds of loading).
+    </p>
+
+    <br><br>
+
+    <p>Statistics of how many people visit te museum per hour.</p>
+    <br>
+
+    <table id="visitor">
+        <thead>
+            <tr>
+                <th>hour of the day</th>
+                <th> number of visitors </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--
+            <tr th:if="${contaVisitatoriPerOra.empty}">
+                <td colspan="2"> No Books Available </td>
+            </tr>
+            -->
+            <tr th:each="y : ${contaVisitatoriPerOra}">
+                <td><span th:text="${y.getKey()}"> Title </span></td>
+                <!--ora idstanza numero-->
+                <td><span th:text="${y.getValue()}"> Title </span></td>
+                <!--visitatori in quell'ora -->
+
+            </tr>
+        </tbody>
+    </table>
+
+
+</body>
+
+</html>

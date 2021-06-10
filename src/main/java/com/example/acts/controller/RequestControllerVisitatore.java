@@ -41,27 +41,38 @@ public class RequestControllerVisitatore {
     public String prova(@RequestParam("visitor")Long idVisitatore, Model model)
     {   Double avgTempo,avgVoto;
         List<Presentazione> temp;
-        List<String>enjoy=new ArrayList<>();
+
+        //List<List<String>>enjoy=new ArrayList<List<String>>();
+        Map<String, List<String>> enjoy = new HashMap<String, List<String>>(); 
+
         model.addAttribute("posizioni",posizioneServices.getByVisitatoreOra(visitatoreServices.getVisitatoreById(idVisitatore).get()));
         List<RisultatoQuery> p=presentazioneServices.getByVisitatoreOra(visitatoreServices.getVisitatoreById(idVisitatore).get());
+        
         for (RisultatoQuery t:p){
-            temp=presentazioneServices.findByName(t.getPresentazione());
-        avgTempo=temp.stream().mapToDouble((x)->Double.valueOf(x.getTempoTotale())).average().getAsDouble();
-        avgVoto= temp.stream().mapToDouble((x)->Double.valueOf(x.getVoto())).average().getAsDouble();
-        String risp;
-        if(t.getTempoTotale()>avgTempo)
-            risp="S";
-        else
-            risp="N";
-        if (t.getVoto()>avgVoto)
-            risp=risp+"S";
-        else
-            risp=risp+"N";
-        if(t.getInterruzione().equals("system"))
-            risp=risp+"S";
-        else
-            risp=risp+"N";
-        enjoy.add(risp);
+            temp = presentazioneServices.findByName(t.getPresentazione());
+
+            avgTempo = temp.stream().mapToDouble((x)->Double.valueOf(x.getTempoTotale())).average().getAsDouble();
+            avgVoto = temp.stream().mapToDouble((x)->Double.valueOf(x.getVoto())).average().getAsDouble();
+
+            List<String> risp = new ArrayList<String>();
+
+            if(t.getTempoTotale()>avgTempo) // Stayed more than the average group
+                risp.add("Yes");
+            else
+                risp.add("No");
+
+            if (t.getVoto()>avgVoto)    // Rated presentation higher than the average
+                risp.add("Yes");
+            else
+                risp.add("No");
+
+            if(t.getInterruzione().equals("system"))    // Did not interrupt the presentations
+                risp.add("No");
+            else
+                risp.add("Yes");
+
+            // enjoy.add(risp);
+            enjoy.put(t.getPresentazione(), risp);
         }
         model.addAttribute("presentazioni",p);
         model.addAttribute("enjoy",enjoy);

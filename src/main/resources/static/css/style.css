@@ -40,7 +40,7 @@ text{
 }
 
 h1 {
-    font: 50px;
+    font-size: 50px;
 }
 
 .main div {
@@ -76,7 +76,9 @@ svg .rect {
     stroke-width: 5px;
 }
 
-button {
+
+
+button, input[type="submit"] {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
@@ -141,4 +143,28 @@ button[disabled] {
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+  }
+
+
+  #visitor {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #visitor td, #visitor th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #visitor tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #visitor tr:hover {background-color: #ddd;}
+  
+  #visitor th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
   }

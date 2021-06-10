@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>ATCS</title>
+    <title>ATCS - Museum Statistics Form</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" th:href="
     @{/css/style.css}">
@@ -11,45 +11,55 @@
 <body>
 
     <div class="topnav">
-        <a class="active" href="">Home</a>
-        <a href="">Play Back</a>
-        <a href="">Museum Statistics</a>
-        <a href="">Assignment</a>
+        <a class="active" href="/">Home</a>
+        <a href="playback">Playback</a>
+        <a href="visitedroombygroup">Museum Statistics</a>
+        <a href="assignment">Assignment</a>
     </div>
 
+    <br>
+    <h1>Museum Statistics</h1>
+    <p>In this page you can select a room to show the statistics of how many visitor per hour visit it.</p>
+    <p>At the end of the page you can see how many people visit the museum per hour.</p>
+    <p>
+        <strong>Attention!</strong> The database that we chose to use is very slow, please be patient (approximately 35-40 seconds of loading).
+    </p>
+    <br>
+    <form action="visitedroombygroup_response">
+        <span>Select a room to show the statistics: </span>
+        <select name="room" id="visitor" required>
+            <option th:each="room : ${idList}" th:value="${room}" th:text="${room}"></option>
+        </select>
+        <br><br>
+        <input type="submit" value="Show Statistics of the Room">
+    </form>
+
+    <br><br>
+
+    <p>Statistics of how many people visit te museum per hour.</p>
+    <br>
     <table id="visitor">
         <thead>
             <tr>
-                <th>Id Stanza</th>
-                <th> Posizioni </th>
-                <th>Ora Inizio</th>
-                <th>Ora Fine</th>
-                <th>Tempo</th>
+                <th>hour of the day</th>
+                <th> number of visitors </th>
             </tr>
         </thead>
         <tbody>
+            <!--
             <tr th:if="${conta.empty}">
                 <td colspan="2"> No Books Available </td>
             </tr>
+            -->
             <tr th:each="x : ${conta}">
-                <td><span th:text="${x.getKey()}"> Title </span></td>   <!--Ora-->
-                <td><span th:text="${x.getValue()}"> Title </span></td> <!--visitatori nel museo a quell'ora-->
-
-            </tr>
-        </tbody>
-        <tbody>
-            <tr th:if="${contaVisitatoriPerOra.empty}">
-                <td colspan="2"> No Books Available </td>
-            </tr>
-            <tr th:each="y : ${contaVisitatoriPerOra}">
-                <td><span th:text="${y.getKey()}"> Title </span></td> <!--ora idstanza numero-->
-                <td><span th:text="${y.getValue()}"> Title </span></td> <!--visitatori in quell'ora -->
+                <td><span th:text="${x.getKey()}"> Title </span></td>
+                <!--Ora-->
+                <td><span th:text="${x.getValue()}"> Title </span></td>
+                <!--visitatori nel museo a quell'ora-->
 
             </tr>
         </tbody>
     </table>
-
-
 </body>
 
 </html>

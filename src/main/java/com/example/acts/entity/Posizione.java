@@ -19,8 +19,10 @@ public class Posizione {
 
     @NotNull
     private Date oraFine;
+
     @ManyToOne
     private Visitatore visitatore;
+    
     @ManyToOne
     private Gruppo gruppo;
 
@@ -29,12 +31,10 @@ public class Posizione {
     public Posizione(Stanza stanza, Date oraInizio, Date oraFine,Visitatore visitatore,Gruppo gruppo) {
         this.stanza = stanza;
         this.oraInizio = oraInizio;
-        this.oraFine=oraFine;
+        this.oraFine = oraFine;
         this.visitatore=visitatore;
         this.gruppo=gruppo;
     }
-
-
 
     public Gruppo getGruppo() {
 
@@ -50,7 +50,7 @@ public class Posizione {
     }
 
     public void setId(Long id) {
-        id = id;
+        this.id = id;
     }
 
     public Stanza getStanza() {

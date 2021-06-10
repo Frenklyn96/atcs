@@ -1,9 +1,9 @@
 <!doctype html>
 <meta charset="utf-8">
-<html lang="it">
+<html lang="en">
 
 <head>
-    <title>ATCS - Play Back</title>
+    <title>ATCS - Playback Form</title>
     <script th:src="@{/js/lib/d3.js}"></script>
     <script th:src="@{/js/lib/jquery-3.6.0.min.js}"></script>
     <link rel="stylesheet" type="text/css" th:href="
@@ -13,30 +13,57 @@
 <body>
 
     <div class="topnav">
-        <a class="active" href="">Home</a>
-        <a href="">Play Back</a>
-        <a href="">Museum Statistics</a>
-        <a href="">Assignment</a>
+        <a class="active" href="/">Home</a>
+        <a href="playback">Playback</a>
+        <a href="visitedroombygroup">Museum Statistics</a>
+        <a href="assignment">Assignment</a>
     </div>
 
 
     <div class="main">
         <div class="svg-container">
-            <h1>Play back</h1>
+            <h1>Show playback</h1>
             <p>Please, select the visitor ID and then click on "Start simulation" to show a playback of the visit.</p>
 
-            <form action="playback_response">
-                <!-- <button id="start" onclick="location.href='AGGIUNGERE QUI (TRA APICI SINGOLI) IL LINK ALLA PAGINE DELLA SIMULAZIONE';"> Start simulation</button> -------- MODIFICATO -->
-                <input type="submit" value="Submit">
+            <br>
 
+            <form action="playback_response">
+                <span>Select Visitor ID: </span>
+                <select name="visitor" id="visitor" required>
+                    <option th:each="visitatore : ${visitatori}" th:value="${visitatore.id}" th:text="${visitatore.id}">
+                    </option>
+                </select>
                 <br><br>
+                <input type="submit" value="Playback">
+            </form>
+
+            <br><br>
+            or
+            <br><br>
+
+            <h1>Show table of the visit</h1>
+            <p>Please, select the visitor ID and then click on "Show recap of visit" to show a table of the visit for
+                the selected visitor.</p>
+
+            <br>
+
+            <form action="visitorsummuary_response">
                 <span>Select Visitor ID: </span>
                 <!-- qui bisogna prelevare l'elenco degli id dei visitatori e metterlo nel menu a tendina -->
                 <select name="visitor" id="visitor" required>
                     <option th:each="visitatore : ${visitatori}" th:value="${visitatore.id}" th:text="${visitatore.id}">
                     </option>
                 </select>
+                <br><br>
+                <input type="submit" value="Show recup of visit">
             </form>
+
+            <br>
+            <p>
+                <strong>Attention!</strong> The database that we chose to use is very slow, please be patient
+                (approximately
+                35-40 seconds of loading).
+            </p>
 
         </div>
     </div>

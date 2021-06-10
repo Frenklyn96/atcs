@@ -12,34 +12,39 @@
 
 <body>
 
-<div class="topnav">
-  <a class="active" href="">Home</a>
-  <a href="">Play Back</a>
-  <a href="">Museum Statistics</a>
-  <a href="">Assignment</a>
-</div>
-
-
-<div class="main">
-  <div class="svg-container">
-    <h1>Play back</h1>
-    <p>Please, select the visitor ID and then click on "Start simulation" to show a playback of the visit.</p>
-
-    <form action="visitorsummuary_response">
-      <!-- <button id="start" onclick="location.href='AGGIUNGERE QUI (TRA APICI SINGOLI) IL LINK ALLA PAGINE DELLA SIMULAZIONE';"> Start simulation</button> -------- MODIFICATO -->
-      <input type="submit" value="Submit">
-
-      <br><br>
-      <span>Select Visitor ID: </span>
-      <!-- qui bisogna prelevare l'elenco degli id dei visitatori e metterlo nel menu a tendina -->
-      <select name="visitor" id="visitor" required>
-        <option th:each="visitatore : ${visitatori}" th:value="${visitatore.id}" th:text="${visitatore.id}">
-        </option>
-      </select>
-    </form>
-
+  <div class="topnav">
+    <a class="active" href="/">Home</a>
+    <a href="playback">Playback</a>
+    <a href="visitedroombygroup">Museum Statistics</a>
+    <a href="assignment">Assignment</a>
   </div>
-</div>
+
+
+  <div class="main">
+    <div class="svg-container">
+      <h1>Play back</h1>
+      <p>Please, select the visitor ID and then click on "Start simulation" to show a playback of the visit.</p>
+      <br>
+      <p>
+        <strong>Attention!</strong> The database that we chose to use is very slow, please be patient (approximately
+        35-40 seconds of loading).
+      </p>
+
+      <form action="visitorsummuary_response">
+        <!-- <button id="start" onclick="location.href='AGGIUNGERE QUI (TRA APICI SINGOLI) IL LINK ALLA PAGINE DELLA SIMULAZIONE';"> Start simulation</button> -------- MODIFICATO -->
+        <input type="submit" value="Submit">
+
+        <br><br>
+        <span>Select Visitor ID: </span>
+        <!-- qui bisogna prelevare l'elenco degli id dei visitatori e metterlo nel menu a tendina -->
+        <select name="visitor" id="visitor" required>
+          <option th:each="visitatore : ${visitatori}" th:value="${visitatore.id}" th:text="${visitatore.id}">
+          </option>
+        </select>
+      </form>
+
+    </div>
+  </div>
 </body>
 
 </html>

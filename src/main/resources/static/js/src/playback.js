@@ -56,6 +56,22 @@ document.addEventListener('keydown', e =>
     e.code === "KeyA" ? count++ || animate() : 0
 );
 
+function showTable() {
+    var table =  d3.select("#recap")
+        .attr("width", 500)
+        .attr("height", 500)
+        .append("foreignObject")
+        .append("xhtml:table");
+
+    table.append("tr")
+        .attr("class", "head")
+        .selectAll("th")
+        .data(data)
+        .enter()
+        .append("th")
+        .html(function (d) {return d})
+}
+
 function showSVG() {
     d3.select(".loader").remove();
 
