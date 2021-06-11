@@ -103,4 +103,14 @@ public class Posizione {
 
         return(a);
     }
+
+    public int getTempoTotale(){
+        int ore=(oraFine.getHours()-oraInizio.getHours())*60*60;
+        int minuti=(oraFine.getMinutes()-oraInizio.getMinutes())*60;
+        int secondi= oraFine.getSeconds()-oraInizio.getSeconds();
+
+
+
+        return(ore+minuti+secondi);
+    }
 }
