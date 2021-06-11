@@ -308,7 +308,7 @@ function replay() {
 }
 
 // Primo avvio
-data=$.getJSON('http://localhost:8080/playback_responselist?visitor='+findGetParameter('visitor'))
+data=$.getJSON('/playback_responselist?visitor=' + findGetParameter('visitor'))
     .then(function(d) {
         data = d;
         console.log(data);
