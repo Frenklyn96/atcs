@@ -36,6 +36,7 @@ public class RequestControllerVisitatore {
         model.addAttribute("visitatori",visitatoreServices.getAllVisitatori());
         return ("visitorsummuary");
     }
+    
     //Ritorno Summuary visitatori
     @RequestMapping(value = "/visitorsummuary_response")
     public String prova(@RequestParam("visitor")Long idVisitatore, Model model)

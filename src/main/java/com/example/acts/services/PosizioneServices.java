@@ -27,16 +27,17 @@ public class PosizioneServices {
     public List<RisultatoQuery> getByGroupOra(Gruppo gruppo){
         return ( posizioneRepository.findByGruppoOra(gruppo));
     }
+    
     public List<Posizione> getByGroup(Gruppo gruppo){
         return(posizioneRepository.findByGruppo(gruppo));
     }
+
     public List<RisultatoQuery> getByVisitatoreOra(Visitatore visitatore){
         return(posizioneRepository.findByVisitatoreOra(visitatore));
     }
 
     public Posizione getLast() {
         return(posizioneRepository.findTopByOrderByIdDesc());
-
     }
 
     public List<RisultatoQuery> getAll() {

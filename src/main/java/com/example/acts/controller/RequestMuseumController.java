@@ -1,6 +1,8 @@
 package com.example.acts.controller;
 
 import com.example.acts.entity.RisultatoQuery;
+import com.example.acts.entity.Posizione;
+import com.example.acts.entity.Presentazione;
 import com.example.acts.entity.Visitatore;
 import com.example.acts.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.*;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javassist.expr.NewArray;
 
 @Controller
 public class RequestMuseumController {
@@ -37,6 +41,7 @@ public class RequestMuseumController {
             conta.put(Integer.valueOf(x.getOraInizio().getHours()),
                     conta.get(Integer.valueOf(x.getOraInizio().getHours())) + 1);
         }
+
         Map<String, Integer> contaVisitatoriPerOra = new HashMap<String, Integer>();
         for (RisultatoQuery x : a) {
             if (x.getStanza() != null) {
@@ -45,6 +50,7 @@ public class RequestMuseumController {
                     contaVisitatoriPerOra.put((key), 0);
                 contaVisitatoriPerOra.put(key, contaVisitatoriPerOra.get(key) + 1);
             }
+
             model.addAttribute("conta", conta);
             model.addAttribute("contaVisitatoriPerOra", contaVisitatoriPerOra);
         }
@@ -85,6 +91,72 @@ public class RequestMuseumController {
 
         return ("visitedroombygroup_response");
     }
+
+    @GetMapping("/roompreferences")
+    public String statisticheStanza(Model model) {
+        List<RisultatoQuery> posizioniTemp;
+        List<RisultatoQuery> a;
+        List<RisultatoQuery> b;
+
+        List<Presentazione> presentazioniTemp;
+
+        List<Visitatore> visitatori;
+
+        List<Integer> dati;
+
+        Map<String, List<Integer>> posizioni;
+
+        Posizione posizioneTemp;
+
+        String nomeStanza;
+        String nomePresentazione;
+
+        Integer tempoTotale;
+
+        a = posizioneServices.getAll();
+        b = presentazioneServices.geALL();
+        a.addAll(b);
+
+        posizioni = new TreeMap<String, List<Integer>>();
+        
+        visitatori = visitatoreServices.getAllVisitatori();
+
+        for (Visitatore v: visitatori) {
+            posizioniTemp =  posizioneServices.getByVisitatoreOra(visitatoreServices.getVisitatoreById(v.getId()).get());   // prendo l'elenco delle stanze che un visitatore ha visitato
+            
+            for (RisultatoQuery p: posizioniTemp) {
+                dati = new ArrayList<Integer>();
+
+                tempoTotale = p.getTempoTotale();
+
+                if(p.getStanza()!=null) {
+                    nomeStanza = p.getStanza().getNome();
+                }
+                else {
+                    nomeStanza = p.getPresentazione();
+                }
+
+                if (posizioni.get(nomeStanza) == null) {
+                    dati.add(tempoTotale);
+                    dati.add(1);
+                    dati.add(tempoTotale);
+
+                    posizioni.put(nomeStanza, dati);
+                }
+                else {
+                    dati.add(0, posizioni.get(nomeStanza).get(0)+tempoTotale);
+                    dati.add(1, posizioni.get(nomeStanza).get(1)+1);
+                    dati.add(2, (dati.get(0)/dati.get(1)));
+
+                    posizioni.put(nomeStanza, dati);
+                }
+             }
+        }
+        model.addAttribute("posizioni", posizioni);
+
+        return ("roompreferences");
+    }
+
 
     @GetMapping("/index")
     public String home(Model model) {

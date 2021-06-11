@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>ATCS - Museum Statistics Form</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="
+    @{/css/style.css}">
+</head>
+
+<body>
+
+    <div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="playback">Playback</a>
+        <a href="visitedroombygroup">Museum Statistics</a>
+        <a href="assignment">Assignment</a>
+    </div>
+
+    <br>
+    <h1>Museum Statistics</h1>
+    
+    <br>
+
+    <p>In this page you can see the statistic for each room and presentation of the museum.</p>
+    <br>
+    <p>
+        <strong>Attention!</strong> The database that we chose to use is very slow, please be patient (approximately 35-40 seconds of loading).
+    </p>
+    <br><br>
+
+    <table id="visitor">
+        <thead>
+            <tr>
+                <th>name of the room</th>
+                <th>total time</th>
+                <th>total visitors</th>
+                <th>average time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--
+            <tr th:if="${contaVisitatoriPerOra.empty}">
+                <td colspan="2"> No Books Available </td>
+            </tr>
+            -->
+            <tr th:each="posizione : ${posizioni}">
+                <td><span th:text="${posizione.getKey()}"> Title </span></td>
+                <!--ora idstanza numero-->
+                <td><span th:text="${posizione.getValue().get(0)}"> Title </span></td>
+                <td><span th:text="${posizione.getValue().get(1)}"> Title </span></td>
+                <td><span th:text="${posizione.getValue().get(2)}"> Title </span></td>
+                <!--visitatori in quell'ora -->
+
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

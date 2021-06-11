@@ -27,24 +27,27 @@ public class RequestControllerVisitatoreRest {
     private VisitatoreServices visitatoreServices;
 
     @RequestMapping(value="/playback_responselist",method= RequestMethod.GET)
-    public List<Mappa> animazione(@RequestParam("visitor") Long idVisitatore, Model model)
-    {
+    public List<Mappa> animazione(@RequestParam("visitor") Long idVisitatore, Model model) {
         List<RisultatoQuery> a = posizioneServices.getByVisitatoreOra(visitatoreServices.getVisitatoreById(idVisitatore).get());
-        List<RisultatoQuery> b= presentazioneServices.getByVisitatoreOra(visitatoreServices.getVisitatoreById(idVisitatore).get());
+        List<RisultatoQuery> b = presentazioneServices.getByVisitatoreOra(visitatoreServices.getVisitatoreById(idVisitatore).get());
+
         a.addAll(b);
+
         Collections.sort(a, new Comparator<RisultatoQuery>() {
             @Override
             public int compare(RisultatoQuery o1, RisultatoQuery o2) {
                 return o1.getOraInizio().compareTo(o2.getOraInizio());
             }
         });
-        List<Mappa> posizioni =new ArrayList<Mappa>();
+
+        List<Mappa> posizioni = new ArrayList<Mappa>();
         for(RisultatoQuery x:a){
             if(x.getStanza()!=null)
                 posizioni.add(new Mappa(x.getStanza().getId(),x.getTempoTotale()));
             else
                 posizioni.add(new Mappa(presentazioneServices.findByName(x.getPresentazione()).get(0).getIdPresentazione(),x.getTempoTotale()));
         }
+
         Long id_temp=posizioni.get(0).getId();
         List<Mappa> risp= new ArrayList<Mappa>();
         Mappa temp;
@@ -61,6 +64,7 @@ public class RequestControllerVisitatoreRest {
                 id_temp=x.getId();
 
         }
+
         return risp;
     }
 }
